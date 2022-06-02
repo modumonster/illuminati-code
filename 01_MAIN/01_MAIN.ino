@@ -18,6 +18,7 @@ bool TimerHandler0(struct repeating_timer *t)
   CVtoLamp();
   CVtoStrip();
   LEDHandler();
+  printCV();
   return true;
 }
 
@@ -42,6 +43,5 @@ void setup(){
 }
 
 void loop(){
-  testbla();
-  delay(1000);
+  buttonHandler();
 }

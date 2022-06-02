@@ -24,10 +24,10 @@ void buttonHandler(){
   buttonPlus.loop();
   buttonMinus.loop();
   buttonSelect.loop();
-  Serial.print("MODE:\t");Serial.print(buttonMode.getState());
-  Serial.print("\t+:\t");Serial.print(buttonPlus.getState());
-  Serial.print("\t-:\t");Serial.print(buttonMinus.getState());
-  Serial.print("\tSELECT:\t");Serial.println(buttonSelect.getState());
+//  Serial.print("MODE:\t");Serial.print(buttonMode.getState());
+//  Serial.print("\t+:\t");Serial.print(buttonPlus.getState());
+//  Serial.print("\t-:\t");Serial.print(buttonMinus.getState());
+//  Serial.print("\tSELECT:\t");Serial.println(buttonSelect.getState());
 }
 
 /*
@@ -76,21 +76,21 @@ void ledsInit(){
 }
 
 struct LEDcolor{
-  uint8_t r; //0-100
+  uint8_t r; //0-255
   uint8_t g;
   uint8_t b;
 };
 
 double Lintensity = 100.0;
 
-const LEDcolor RED = {100,0,0};
-const LEDcolor GREEN = {0,100,0};
-const LEDcolor BLUE = {0,0,100};
+const LEDcolor RED = {255,0,0};
+const LEDcolor GREEN = {0,255,0};
+const LEDcolor BLUE = {0,0,255};
 
-LEDcolor modeLED = {100,0,0};
-LEDcolor plusLED = {0,100,0};
-LEDcolor minusLED = {0,0,100};
-LEDcolor selectLED = {100,0,100};
+LEDcolor modeLED = {255,0,0};
+LEDcolor plusLED = {0,255,0};
+LEDcolor minusLED = {0,0,255};
+LEDcolor selectLED = {255,0,255};
 
 double rgbToDuty(uint8_t input){
   return 100.0-((double)input/255)*Lintensity;
@@ -102,30 +102,30 @@ void LEDHandler(){
     case 0:
       digitalWrite(LselectPin,  LOW);
       digitalWrite(LmodePin,    HIGH);
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100.0-modeLED.r, true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100.0-modeLED.g, true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100.0-modeLED.b, true);
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(modeLED.r), true);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(modeLED.g), true);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(modeLED.b), true);
       break;
     case 1:
       digitalWrite(LmodePin,    LOW);
       digitalWrite(LplusPin,    HIGH);
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100.0-plusLED.r, true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100.0-plusLED.g, true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100.0-plusLED.b, true);
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(plusLED.r), true);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(plusLED.g), true);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(plusLED.b), true);
       break;
     case 2:
       digitalWrite(LplusPin,    LOW);
       digitalWrite(LminusPin,   HIGH);
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100.0-minusLED.r, true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100.0-minusLED.g, true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100.0-minusLED.b, true);
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(minusLED.r), true);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(minusLED.g), true);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(minusLED.b), true);
       break;
     case 3:
       digitalWrite(LminusPin,   LOW);
       digitalWrite(LselectPin,  HIGH);
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100.0-selectLED.r, true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100.0-selectLED.g, true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100.0-selectLED.b, true);
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(selectLED.r), true);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(selectLED.g), true);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(selectLED.b), true);
       break;
     default:
     break;
