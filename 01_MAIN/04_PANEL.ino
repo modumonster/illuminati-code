@@ -1,4 +1,3 @@
-#include <Button2.h>
 
 const uint8_t BmodePin = 12;
 const uint8_t BplusPin = 13;
@@ -7,7 +6,7 @@ const uint8_t BselectPin = 15;
 
 const uint16_t longPressMillis = 1000;
 
-public Button2 buttonMode, buttonPlus, buttonMinus, buttonSelect;
+Button2 buttonMode, buttonPlus, buttonMinus, buttonSelect;
 
 void buttonInit(){
   buttonMode.begin(BmodePin);
@@ -36,6 +35,18 @@ void buttonInit(){
 #define MINUS   2
 #define SELECT  3
 
+void buttons(){
+  buttonMode.loop();
+  buttonPlus.loop();
+  buttonMinus.loop();
+  buttonSelect.loop();
+}
+
+
+
+uint8_t modeAndPlus = 0;
+uint8_t minusAndSelect = 0;
+
 void clickHandler(Button2& btn){
  switch (btn.getType()) {
         case single_click:
@@ -49,7 +60,7 @@ void clickHandler(Button2& btn){
                 break;
               case MINUS:
 
-                break
+                break;
               case SELECT:
 
                 break;
@@ -67,15 +78,11 @@ void clickHandler(Button2& btn){
     Serial.print("on button #");
     Serial.println(btn.getID());
 }
-
-uint8_t modeAndPlus = 0;
-uint8_t minusAndSelect = 0;
-
 void longpressHandler(Button2& btn){
   uint16_t time = btn.wasPressedFor();
     if(btn.getID() == MODE || btn.getID() == PLUS) modeAndPlus--;
 
-    if(btn.getID() == MINUS || btn.getID()ID == SELECT) minusAndSelect--;
+    if(btn.getID() == MINUS || btn.getID() == SELECT) minusAndSelect--;
 }
 
 void lpDetectedHandler(Button2& btn){
@@ -123,12 +130,6 @@ void lpDetectedHandler(Button2& btn){
 
   //is there another button longpressed?
 //  if()
-}
-void buttons(){
-  buttonMode.loop();
-  buttonPlus.loop();
-  buttonMinus.loop();
-  buttonSelect.loop();
 }
 /*
  * ### LEDs

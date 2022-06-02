@@ -1,6 +1,8 @@
-
 #include "RP2040_PWM.h"
 #include "RPi_Pico_TimerInterrupt.h"
+
+#include <Button2.h>
+#include <Adafruit_NeoPixel.h>
 
 
 
@@ -35,12 +37,12 @@ void setup(){
     Serial.println(F("Can't set ITimer0. Select another Timer, freq. or timer"));
 
     
-  buttonInit();
   ledsInit();
   lampInit();
   stripsInit();
   CVInit();
-      
+  buttonInit();
+
 }
 
 void loop(){

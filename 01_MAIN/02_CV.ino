@@ -38,7 +38,7 @@ struct CV{
   double   Value;
   uint16_t zeroVolts; //for calibration
   uint16_t fiveVolts; //for calibration
-}
+};
 
 
 #define R 0

@@ -1,8 +1,6 @@
 const uint8_t stripAPin = 2;
 const uint8_t stripZPin = 3;
 
-#include <Adafruit_NeoPixel.h>
-
 uint8_t APixels = 16; // Popular NeoPixel ring size
 uint8_t ZPixels = 16;
 
