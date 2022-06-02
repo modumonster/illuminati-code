@@ -19,10 +19,10 @@ void buttonInit(){
   btnMinus.setClickHandler(clickHandler);
   btnSelect.setClickHandler(clickHandler);
 
-  btnMode.setLongClickHandler(longpressHandler);
-  btnPlus.setLongClickHandler(longpressHandler);
-  btnMinus.setLongClickHandler(longpressHandler);
-  btnSelect.setLongClickHandler(longpressHandler);
+  btnMode.setLongClickHandler(lpHandler);
+  btnPlus.setLongClickHandler(lpHandler);
+  btnMinus.setLongClickHandler(lpHandler);
+  btnSelect.setLongClickHandler(lpHandler);
 
   btnMode.setLongClickDetectedHandler(lpDetectedHandler);
   btnPlus.setLongClickDetectedHandler(lpDetectedHandler);
@@ -89,7 +89,7 @@ void clickHandler(Button2& btn){
     Serial.print("on button #");
     Serial.println(btn.getID());
 }
-void longpressHandler(Button2& btn){
+void lpHandler(Button2& btn){
   uint16_t time = btn.wasPressedFor();
     if(btn.getID() == MODE || btn.getID() == PLUS) modeAndPlus--;
 
