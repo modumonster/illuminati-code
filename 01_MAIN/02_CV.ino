@@ -24,6 +24,23 @@ uint16_t Zmin = 178;
 uint16_t Zmax = 3605;
 
 
+struct CV{
+//  uint8_t readPin;
+//  uint8_t switchPin;
+//  uint8_t mySwitch;
+
+  uint16_t rawValue;
+  uint16_t rawLastValue;
+
+  double   rangeMin;
+  double   rangeMax;
+  
+  double   Value;
+  uint16_t zeroVolts; //for calibration
+  uint16_t fiveVolts; //for calibration
+}
+
+
 #define R 0
 #define G 1
 #define B 2
