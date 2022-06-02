@@ -67,10 +67,10 @@ void CVInit(){
 const bool readRBA = 0;
 const bool readGPZ = 1;
 
-bool CVswitch = readARB;
+bool CVswitch = readRBA;
 void CVRead(){
   switch(CVswitch){
-    case readARB:
+    case readRBA:
       CVValues[A] = analogRead(azCVPin);
       CVValues[R] = analogRead(rgCVPin);
       CVValues[B] = analogRead(bpCVPin);
@@ -83,7 +83,7 @@ void CVRead(){
 
       break;
 
-    case readZGP:  
+    case readGPZ:  
       CVValues[Z] = analogRead(azCVPin);
       CVValues[G] = analogRead(rgCVPin);
       CVValues[P] = analogRead(bpCVPin);
