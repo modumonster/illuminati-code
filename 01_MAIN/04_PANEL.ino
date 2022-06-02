@@ -1,35 +1,135 @@
+#include <Button2.h>
+
 const uint8_t BmodePin = 12;
 const uint8_t BplusPin = 13;
 const uint8_t BminusPin = 14;
 const uint8_t BselectPin = 15;
 
-const uint8_t debounceTime = 100; //millis
+const uint16_t longPressMillis = 1000;
 
-#include <ezButton.h>
-
-ezButton buttonMode(BmodePin);
-ezButton buttonPlus(BplusPin);
-ezButton buttonMinus(BminusPin);
-ezButton buttonSelect(BselectPin);
+public Button2 buttonMode, buttonPlus, buttonMinus, buttonSelect;
 
 void buttonInit(){
-  buttonMode.setDebounceTime(debounceTime);
-  buttonPlus.setDebounceTime(debounceTime);
-  buttonMinus.setDebounceTime(debounceTime);
-  buttonSelect.setDebounceTime(debounceTime);
+  buttonMode.begin(BmodePin);
+  buttonPlus.begin(BplusPin);
+  buttonMinus.begin(BminusPin);
+  buttonSelect.begin(BselectPin);
+  
+  buttonMode.setClickHandler(clickHandler);
+  buttonPlus.setClickHandler(clickHandler);
+  buttonMinus.setClickHandler(clickHandler);
+  buttonSelect.setClickHandler(clickHandler);
+
+  buttonMode.setLongClickHandler(longpressHandler);
+  buttonPlus.setLongClickHandler(longpressHandler);
+  buttonMinus.setLongClickHandler(longpressHandler);
+  buttonSelect.setLongClickHandler(longpressHandler);
+
+  buttonMode.setLongClickDetectedHandler(lpDetectedHandler);
+  buttonPlus.setLongClickDetectedHandler(lpDetectedHandler);
+  buttonMinus.setLongClickDetectedHandler(lpDetectedHandler);
+  buttonSelect.setLongClickDetectedHandler(lpDetectedHandler);
 }
 
-void buttonHandler(){
+#define MODE    0
+#define PLUS    1
+#define MINUS   2
+#define SELECT  3
+
+void clickHandler(Button2& btn){
+ switch (btn.getType()) {
+        case single_click:
+          
+            switch(btn.getID()){
+              case MODE:
+
+                break;
+              case PLUS:
+
+                break;
+              case MINUS:
+
+                break
+              case SELECT:
+
+                break;
+              default:
+                break;
+            }
+            
+            break;
+            
+        case double_click:
+            Serial.print("double ");
+            break;
+    }
+    Serial.print("click ");
+    Serial.print("on button #");
+    Serial.println(btn.getID());
+}
+
+uint8_t modeAndPlus = 0;
+uint8_t minusAndSelect = 0;
+
+void longpressHandler(Button2& btn){
+  uint16_t time = btn.wasPressedFor();
+    if(btn.getID() == MODE || btn.getID() == PLUS) modeAndPlus--;
+
+    if(btn.getID() == MINUS || btn.getID()ID == SELECT) minusAndSelect--;
+}
+
+void lpDetectedHandler(Button2& btn){
+
+  switch(btn.getID()){
+              case MODE:
+                modeAndPlus++;
+                if(modeAndPlus >= 2){
+                  //go to MIDI menu
+                }
+                else{
+                  
+                }
+                break;
+              case PLUS:
+                modeAndPlus++;
+                if(modeAndPlus >= 2){
+                  //go to MIDI menu
+                }
+                else{
+                  //go to GAIN menu
+                }
+                break;
+              case MINUS:
+                minusAndSelect++;
+                if(minusAndSelect >= 2){
+                  //go to STRIPS menu
+                }
+                else{
+                  //go to STEPS menu
+                }
+                break;
+              case SELECT:
+                minusAndSelect++;
+                if(minusAndSelect >= 2){
+                  //go to STRIPS menu
+                }
+                else{
+                  //go to JAM menu
+                }
+                break;
+              default:
+                break;
+            }
+
+  //is there another button longpressed?
+//  if()
+}
+void buttons(){
   buttonMode.loop();
   buttonPlus.loop();
   buttonMinus.loop();
   buttonSelect.loop();
-//  Serial.print("MODE:\t");Serial.print(buttonMode.getState());
-//  Serial.print("\t+:\t");Serial.print(buttonPlus.getState());
-//  Serial.print("\t-:\t");Serial.print(buttonMinus.getState());
-//  Serial.print("\tSELECT:\t");Serial.println(buttonSelect.getState());
 }
-
 /*
  * ### LEDs
 */

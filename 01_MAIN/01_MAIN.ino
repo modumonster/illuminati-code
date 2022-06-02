@@ -1,3 +1,4 @@
+
 #include "RP2040_PWM.h"
 #include "RPi_Pico_TimerInterrupt.h"
 
@@ -43,5 +44,5 @@ void setup(){
 }
 
 void loop(){
-  buttonHandler();
+  buttons();
 }
