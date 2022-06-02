@@ -40,6 +40,7 @@ struct CV{
   uint16_t fiveVolts; //for calibration
 };
 
+CV rCV, gCV, bCV, pCV, aCV, zCV;
 
 #define R 0
 #define G 1
@@ -50,12 +51,12 @@ struct CV{
 
 void CVInit(){
   analogReadResolution(12);
-  pinMode(azCVPin, INPUT);
   pinMode(rgCVPin, INPUT);
   pinMode(bpCVPin, INPUT);
-  pinMode(azControlPin, OUTPUT);
+  pinMode(azCVPin, INPUT);
   pinMode(rgControlPin, OUTPUT);
   pinMode(bpControlPin, OUTPUT);
+  pinMode(azControlPin, OUTPUT);
 
   digitalWrite(azControlPin, LOW);
   digitalWrite(rgControlPin, LOW);
@@ -63,8 +64,8 @@ void CVInit(){
 }
 
 
-const bool readARB = 0;
-const bool readZGP = 1;
+const bool readRBA = 0;
+const bool readGPZ = 1;
 
 bool CVswitch = readARB;
 void CVRead(){
@@ -98,6 +99,36 @@ void CVRead(){
     CVswitch = !CVswitch;
 }
 
+void CVReadNEW(){
+  switch(CVswitch){
+    case readRBA:
+      rCV.rawValue = analogRead(rgCVPin);
+      bCV.rawValue = analogRead(bpCVPin);
+      aCV.rawValue = analogRead(azCVPin);
+      digitalWrite(azControlPin, HIGH);
+      digitalWrite(rgControlPin, HIGH);
+      digitalWrite(bpControlPin, HIGH);
+      rCV.Value = mapd(rCV.rawValue,rCV.fiveVolts-2*rCV.zeroVolts,rCV.fiveVolts,rCV.rangeMin,rCV.rangeMax);
+      bCV.Value = mapd(bCV.rawValue,bCV.fiveVolts-2*bCV.zeroVolts,bCV.fiveVolts,bCV.rangeMin,bCV.rangeMax);
+      aCV.Value = mapd(aCV.rawValue,aCV.fiveVolts-2*aCV.zeroVolts,aCV.fiveVolts,aCV.rangeMin,aCV.rangeMax);
+
+      break;
+
+    case readGPZ:  
+      gCV.rawValue = analogRead(rgCVPin);
+      pCV.rawValue = analogRead(bpCVPin);
+      zCV.rawValue = analogRead(azCVPin);
+      digitalWrite(azControlPin, LOW);
+      digitalWrite(rgControlPin, LOW);
+      digitalWrite(bpControlPin, LOW);
+      gCV.Value = mapd(gCV.rawValue,gCV.fiveVolts-2*gCV.zeroVolts,gCV.fiveVolts,gCV.rangeMin,gCV.rangeMax);
+      pCV.Value = mapd(pCV.rawValue,pCV.fiveVolts-2*pCV.zeroVolts,pCV.fiveVolts,pCV.rangeMin,pCV.rangeMax);
+      zCV.Value = mapd(zCV.rawValue,zCV.fiveVolts-2*zCV.zeroVolts,zCV.fiveVolts,zCV.rangeMin,zCV.rangeMax);
+
+      break;
+  }
+    CVswitch = !CVswitch;
+}
 void printCV(){
   Serial.print("R:"); Serial.print(CVValues[R]); Serial.print(" -> "); Serial.print(CVControls[R]); Serial.print("\t");
   Serial.print("G:"); Serial.print(CVValues[G]); Serial.print(" -> "); Serial.print(CVControls[G]); Serial.print("\t");
@@ -109,6 +140,6 @@ void printCV(){
 
 void calibrateCV(){
   
-  //bla bla bla, vyhodim
+  //bla bla bla, vyhodim data
   
 }
