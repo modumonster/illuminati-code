@@ -6,7 +6,7 @@ const uint8_t azControlPin = 6;
 const uint8_t rgControlPin = 7;
 const uint8_t bpControlPin = 8;
 
-uint16_t CVValues[6] = {0};
+uint16_t CVValues[6] = {0}; //soon to be deleted
 double CVControls[6] = {0};
 
 

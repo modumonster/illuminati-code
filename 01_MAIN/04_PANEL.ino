@@ -1,33 +1,44 @@
-
 const uint8_t BmodePin = 12;
 const uint8_t BplusPin = 13;
 const uint8_t BminusPin = 14;
 const uint8_t BselectPin = 15;
 
-const uint16_t longPressMillis = 1000;
+const uint16_t debounceMillis = 50;
+const uint16_t longPressMillis = 500;
 
-Button2 buttonMode, buttonPlus, buttonMinus, buttonSelect;
+Button2 btnMode, btnPlus, btnMinus, btnSelect;
 
 void buttonInit(){
-  buttonMode.begin(BmodePin);
-  buttonPlus.begin(BplusPin);
-  buttonMinus.begin(BminusPin);
-  buttonSelect.begin(BselectPin);
+  btnMode.begin(BmodePin);
+  btnPlus.begin(BplusPin);
+  btnMinus.begin(BminusPin);
+  btnSelect.begin(BselectPin);
   
-  buttonMode.setClickHandler(clickHandler);
-  buttonPlus.setClickHandler(clickHandler);
-  buttonMinus.setClickHandler(clickHandler);
-  buttonSelect.setClickHandler(clickHandler);
+  btnMode.setClickHandler(clickHandler);
+  btnPlus.setClickHandler(clickHandler);
+  btnMinus.setClickHandler(clickHandler);
+  btnSelect.setClickHandler(clickHandler);
 
-  buttonMode.setLongClickHandler(longpressHandler);
-  buttonPlus.setLongClickHandler(longpressHandler);
-  buttonMinus.setLongClickHandler(longpressHandler);
-  buttonSelect.setLongClickHandler(longpressHandler);
+  btnMode.setLongClickHandler(longpressHandler);
+  btnPlus.setLongClickHandler(longpressHandler);
+  btnMinus.setLongClickHandler(longpressHandler);
+  btnSelect.setLongClickHandler(longpressHandler);
 
-  buttonMode.setLongClickDetectedHandler(lpDetectedHandler);
-  buttonPlus.setLongClickDetectedHandler(lpDetectedHandler);
-  buttonMinus.setLongClickDetectedHandler(lpDetectedHandler);
-  buttonSelect.setLongClickDetectedHandler(lpDetectedHandler);
+  btnMode.setLongClickDetectedHandler(lpDetectedHandler);
+  btnPlus.setLongClickDetectedHandler(lpDetectedHandler);
+  btnMinus.setLongClickDetectedHandler(lpDetectedHandler);
+  btnSelect.setLongClickDetectedHandler(lpDetectedHandler);
+
+  btnMode.setDebounceTime(debounceMillis);
+  btnPlus.setDebounceTime(debounceMillis);
+  btnMinus.setDebounceTime(debounceMillis);
+  btnSelect.setDebounceTime(debounceMillis);
+
+  btnMode.setLongClickTime(longPressMillis);
+  btnPlus.setLongClickTime(longPressMillis);
+  btnMinus.setLongClickTime(longPressMillis);
+  btnSelect.setLongClickTime(longPressMillis);
+
 }
 
 #define MODE    0
@@ -36,10 +47,10 @@ void buttonInit(){
 #define SELECT  3
 
 void buttons(){
-  buttonMode.loop();
-  buttonPlus.loop();
-  buttonMinus.loop();
-  buttonSelect.loop();
+  btnMode.loop();
+  btnPlus.loop();
+  btnMinus.loop();
+  btnSelect.loop();
 }
 
 
@@ -184,14 +195,20 @@ struct LEDcolor{
 
 double Lintensity = 100.0;
 
-const LEDcolor RED = {255,0,0};
-const LEDcolor GREEN = {0,255,0};
-const LEDcolor BLUE = {0,0,255};
+const LEDcolor RED      = {255,0,0};
+const LEDcolor GREEN    = {0,255,0};
+const LEDcolor BLUE     = {0,0,255};
 
-LEDcolor modeLED = {255,0,0};
-LEDcolor plusLED = {0,255,0};
-LEDcolor minusLED = {0,0,255};
-LEDcolor selectLED = {255,0,255};
+const LEDcolor YELLOW   = {255,255,0};
+const LEDcolor CYAN     = {0,255,255};
+const LEDcolor MAGENTA  = {255,0,255};
+
+const LEDcolor OFF     = {0,0,0};
+
+LEDcolor modeLED        = {255,0,0};
+LEDcolor plusLED        = {0,255,0};
+LEDcolor minusLED       = {0,0,255};
+LEDcolor selectLED      = {255,0,255};
 
 double rgbToDuty(uint8_t input){
   return 100.0-((double)input/255)*Lintensity;
@@ -237,5 +254,36 @@ void LEDHandler(){
 
 
 void ledTest(){
+  modeLED = RED;
+  delay(500);
+  modeLED = GREEN;
+  delay(500);
+  modeLED = BLUE;
+  delay(500);
+  modeLED = OFF;
+
+  plusLED = RED;
+  delay(500);
+  plusLED = GREEN;
+  delay(500);
+  plusLED = BLUE;
+  delay(500);
+  plusLED = OFF;
+
+  minusLED = RED;
+  delay(500);
+  minusLED = GREEN;
+  delay(500);
+  modeLED = BLUE;
+  delay(500);
+  minusLED = OFF;
+
+  selectLED = RED;
+  delay(500);
+  selectLED = GREEN;
+  delay(500);
+  selectLED = BLUE;
+  delay(500);
+  selectLED = OFF;
   
 }
