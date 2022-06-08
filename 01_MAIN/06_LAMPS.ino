@@ -1,6 +1,3 @@
-const uint8_t lampAPin = 10;
-const uint8_t lampZPin = 11;
-
 const double lampPWMfreq = 9000.0; //Hz
 double dutyA = 50.0;
 double dutyZ = 50.0;

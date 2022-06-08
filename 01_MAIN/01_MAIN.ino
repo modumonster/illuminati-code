@@ -4,7 +4,7 @@
 #include <Button2.h>
 #include <Adafruit_NeoPixel.h>
 
-
+#include "HW.h"
 
 #define TIMER0_INTERVAL_MS        1
 RPI_PICO_Timer ITimer0(0);
@@ -38,14 +38,13 @@ void setup(){
 
     
   ledsInit();
-  //lampInit();
-  //stripsInit();
-  //CVInit();
-  //buttonInit();
+  lampInit();
+  stripsInit();
+  CVInit();
+  buttonInit();
 
 }
 
 void loop(){
-  //buttons();
-  ledTest();
+  buttons();
 }
