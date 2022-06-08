@@ -54,34 +54,116 @@ uint8_t modeAndPlus = 0;
 uint8_t minusAndSelect = 0;
 
 void clickHandler(Button2& btn){
- switch (btn.getType()) {
-        case single_click:
-            switch(btn.getID()){
-              case MODE:
-                
-                break;
-              case PLUS:
+ if (btn.getType() == single_click) {        
+        uint8_t btnId = btn.getID();
+          switch(menuPage){
+            case GAIN:
+                if(btnId == MODE){
+                  selectLED = RED; //this is temporary, just to test menu
+                }
+                else if(btnId == PLUS){
+                  selectLED = GREEN;
+                }
+                else if(btnId == MINUS){
+                  selectLED = BLUE;
+                }
+                else if(btnId == SELECT){
+                  selectLED = YELLOW;
+                }
+              break;
+            case DECAY:
+                if(btnId == MODE){
 
-                break;
-              case MINUS:
+                }
+                else if(btnId == PLUS){
+                  
+                }
+                else if(btnId == MINUS){
+                  
+                }
+                else if(btnId == SELECT){
+                  
+                }
+              break;
+            case STEPS:
+                if(btnId == MODE){
 
-                break;
-              case SELECT:
+                }
+                else if(btnId == PLUS){
+                  
+                }
+                else if(btnId == MINUS){
+                  
+                }
+                else if(btnId == SELECT){
+                  
+                }
+              break;
+            case JAM:
+                if(btnId == MODE){
 
-                break;
-              default:
-                break;
-            }
+                }
+                else if(btnId == PLUS){
+                  
+                }
+                else if(btnId == MINUS){
+                  
+                }
+                else if(btnId == SELECT){
+                  
+                }
+              break;
+            case MIDI:
+                if(btnId == MODE){
+
+                }
+                else if(btnId == PLUS){
+                  
+                }
+                else if(btnId == MINUS){
+                  
+                }
+                else if(btnId == SELECT){
+                  
+                }
+              break;
+
+            case STRIPS:
+                if(btnId == MODE){
+
+                }
+                else if(btnId == PLUS){
+                  
+                }
+                else if(btnId == MINUS){
+                  
+                }
+                else if(btnId == SELECT){
+                  
+                }
+              break;
+            case CAL:
+                if(btnId == MODE){
+
+                }
+                else if(btnId == PLUS){
+                  
+                }
+                else if(btnId == MINUS){
+                  
+                }
+                else if(btnId == SELECT){
+                  
+                }
+              break;
+          
+          }
             
-            break;
-            
-        case double_click:
-            Serial.print("double ");
-            break;
-    }
     Serial.print("click ");
     Serial.print("on button #");
     Serial.println(btn.getID());
+}
+  //else if double_click
 }
 void lpHandler(Button2& btn){
   uint16_t time = btn.wasPressedFor();
@@ -92,45 +174,46 @@ void lpHandler(Button2& btn){
 
 void lpDetectedHandler(Button2& btn){
   switch(btn.getID()){
-              case MODE:
-                modeAndPlus++;
-                if(modeAndPlus < 2){
-                  menuPage = DECAY;
-                }
-                break;
-              case PLUS:
-                modeAndPlus++;
-                if(modeAndPlus < 2){
-                  menuPage = GAIN;
-                }
-                break;
-              case MINUS:
-                minusAndSelect++;
-                if(minusAndSelect < 2){
-                  menuPage = STEPS;
-                }
-                break;
-              case SELECT:
-                minusAndSelect++;
-                if(minusAndSelect < 2){
-                  menuPage = JAM;
-                }
-                else{
-                  //go to JAM menu
-                  menuPage = JAM;
-                }
-                break;
-              default:
-                break;
 
-            }
-            if(modeAndPlus >= 2){
-              menuPage = MIDI;
-            }
-            if(minusAndSelect >= 2){
-              menuPage = STRIPS;
-            }
+    case MODE || PLUS:
+      break;
+    case MODE:
+      modeAndPlus++;
+      if(modeAndPlus < 2){
+        menuPage = DECAY;
+      }
+      break;
+    case PLUS:
+      modeAndPlus++;
+      if(modeAndPlus < 2){
+        menuPage = GAIN;
+      }
+      break;
+    case MINUS:
+      minusAndSelect++;
+      if(minusAndSelect < 2){
+        menuPage = STEPS;
+      }
+      break;
+    case SELECT:
+      minusAndSelect++;
+      if(minusAndSelect < 2){
+        menuPage = JAM;
+      }
+      else{
+        //go to JAM menu
+        menuPage = JAM;
+      }
+      break;
+    default:
+      break;
+
+  }
+  if(modeAndPlus >= 2){
+    menuPage = MIDI;
+  }
+  if(minusAndSelect >= 2){
+    menuPage = STRIPS;
+  }
   updatePage();
-  //is there another button longpressed?
-//  if()
 }
