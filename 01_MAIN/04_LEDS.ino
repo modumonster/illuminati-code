@@ -4,7 +4,10 @@
 */
 
 
-const double ledPWMfreq = 4000.0; //Hz
+// minusLED BLUE does modeLED BLUE
+// LEDs are still fucked
+// still weird blinking
+const double ledPWMfreq = 40000.0; //Hz
 double dutyR = 100.0;
 double dutyG = 100.0;
 double dutyB = 100.0;
@@ -33,7 +36,10 @@ void ledsInit(){
   digitalWrite(LplusPin,  LOW);
   digitalWrite(LminusPin, LOW);
   digitalWrite(LselectPin,LOW);
+
+  updatePage();
 }
+
 
 struct LEDcolor{
   uint8_t r; //0-255
@@ -53,7 +59,7 @@ const LEDcolor MAGENTA  = {255,0,255};
 
 const LEDcolor OFF     = {0,0,0};
 
-LEDcolor modeLED        = {0,0,0};
+LEDcolor modeLED        = {255,0,0};
 LEDcolor plusLED        = {0,0,0};
 LEDcolor minusLED       = {0,0,0};
 LEDcolor selectLED      = {0,0,0};
@@ -64,15 +70,25 @@ double rgbToDuty(uint8_t input){
 
 uint8_t LHandlerState = 0;
 void LEDHandler(){
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true); // this fixes the light overspill somehow
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true); //should be 
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
   switch(LHandlerState){
     case 0:
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
       digitalWrite(LselectPin,  LOW);
       digitalWrite(LmodePin,    HIGH);
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(modeLED.r), true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(modeLED.g), true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(modeLED.b), true);
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(modeLED.r), false);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(modeLED.g), false);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(modeLED.b), false);
+
       break;
     case 1:
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
       digitalWrite(LmodePin,    LOW);
       digitalWrite(LplusPin,    HIGH);
       PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(plusLED.r), true);
@@ -80,6 +96,9 @@ void LEDHandler(){
       PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(plusLED.b), true);
       break;
     case 2:
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
       digitalWrite(LplusPin,    LOW);
       digitalWrite(LminusPin,   HIGH);
       PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(minusLED.r), true);
@@ -87,6 +106,9 @@ void LEDHandler(){
       PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(minusLED.b), true);
       break;
     case 3:
+      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
+      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
+      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
       digitalWrite(LminusPin,   LOW);
       digitalWrite(LselectPin,  HIGH);
       PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(selectLED.r), true);
@@ -98,6 +120,33 @@ void LEDHandler(){
   }
   LHandlerState++;
   if(LHandlerState>3)LHandlerState = 0;
+}
+
+void updatePage(){
+  switch(menuPage){
+    case GAIN:
+      modeLED = RED;
+      break;
+    case DECAY:
+      modeLED = GREEN;
+      break;
+    case STEPS:
+      modeLED = BLUE;
+      break;
+    case JAM:
+      modeLED = YELLOW;
+      break;
+    case MIDI:
+      modeLED = CYAN;
+      break;
+    case STRIPS:
+      modeLED = MAGENTA;
+      break;
+    case CAL:
+      modeLED = OFF;
+      break;
+  }
+  
 }
 
 void resetLEDs(){
@@ -114,7 +163,13 @@ void ledTest(){
   modeLED = BLUE;
   delay(500);
   modeLED = OFF;
+  delay(500);
 
+  modeLED = OFF;
+  plusLED = OFF;
+  minusLED = OFF;
+  selectLED = OFF;
+  
   plusLED = RED;
   delay(500);
   plusLED = GREEN;
@@ -122,6 +177,7 @@ void ledTest(){
   plusLED = BLUE;
   delay(500);
   plusLED = OFF;
+  delay(500);
 
   minusLED = RED;
   delay(500);
@@ -130,6 +186,7 @@ void ledTest(){
   modeLED = BLUE;
   delay(500);
   minusLED = OFF;
+  delay(500);
 
   selectLED = RED;
   delay(500);
@@ -138,5 +195,6 @@ void ledTest(){
   selectLED = BLUE;
   delay(500);
   selectLED = OFF;
+  delay(500);
   
 }

@@ -26,3 +26,16 @@ const uint8_t lampZPin = 11;
 
 const uint8_t stripAPin = 2;
 const uint8_t stripZPin = 3;
+
+
+
+
+#define GAIN 0
+#define DECAY 1
+#define STEPS 2
+#define JAM 3
+#define MIDI 4
+#define STRIPS 5
+#define CAL 6
+
+uint8_t menuPage = JAM;

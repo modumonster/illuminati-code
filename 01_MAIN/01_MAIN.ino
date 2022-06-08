@@ -6,8 +6,9 @@
 
 #include "HW.h"
 
-#define TIMER0_INTERVAL_MS        1
+#define TIMER0_INTERVAL_uS        1000
 RPI_PICO_Timer ITimer0(0);
+RPI_PICO_Timer ITimer1(1);
 
 bool TimerHandler0(struct repeating_timer *t)
 {
@@ -17,11 +18,23 @@ bool TimerHandler0(struct repeating_timer *t)
   Serial.print("ITimer0: millis() = "); Serial.println(millis());
 #endif
 
-  //CVRead();
-  //CVtoLamp();
-  //CVtoStrip();
-  LEDHandler();
+  CVRead();
+  CVtoLamp();
+  CVtoStrip();
   //printCV();
+  return true;
+}
+
+#define TIMER1_INTERVAL_uS 500
+bool TimerHandler1(struct repeating_timer *t)
+{
+  static bool toggle1 = false;
+
+#if (TIMER_INTERRUPT_DEBUG > 0)
+  Serial.print("ITimer1: millis() = "); Serial.println(millis());
+#endif
+
+  LEDHandler();
   return true;
 }
 
@@ -29,13 +42,8 @@ bool TimerHandler0(struct repeating_timer *t)
 void setup(){
   Serial.begin(115200);
     // init interrupt
-    if (ITimer0.attachInterruptInterval(TIMER0_INTERVAL_MS * 1000, TimerHandler0))
-  {
-    Serial.print(F("Starting ITimer0 OK, millis() = ")); Serial.println(millis());
-  }
-  else
-    Serial.println(F("Can't set ITimer0. Select another Timer, freq. or timer"));
-
+  ITimer0.attachInterruptInterval(TIMER0_INTERVAL_uS, TimerHandler0);
+  ITimer1.attachInterruptInterval(TIMER1_INTERVAL_uS, TimerHandler1);
     
   ledsInit();
   lampInit();
@@ -47,4 +55,5 @@ void setup(){
 
 void loop(){
   buttons();
+  //ledTest();
 }

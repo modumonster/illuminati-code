@@ -1,4 +1,4 @@
-const uint16_t debounceMillis = 10;
+const uint16_t debounceMillis = 5;
 const uint16_t longPressMillis = 500;
 
 Button2 btnMode, btnPlus, btnMinus, btnSelect;
@@ -56,10 +56,8 @@ uint8_t minusAndSelect = 0;
 void clickHandler(Button2& btn){
  switch (btn.getType()) {
         case single_click:
-        modeLED = OFF;
             switch(btn.getID()){
               case MODE:
-                modeLED = RED;
                 
                 break;
               case PLUS:
@@ -93,47 +91,46 @@ void lpHandler(Button2& btn){
 }
 
 void lpDetectedHandler(Button2& btn){
-  modeLED = OFF;
   switch(btn.getID()){
               case MODE:
                 modeAndPlus++;
-                if(modeAndPlus >= 2){
-                  //go to MIDI menu
-                }
-                else{
+                if(modeAndPlus < 2){
+                  menuPage = DECAY;
                 }
                 break;
               case PLUS:
                 modeAndPlus++;
-                if(modeAndPlus >= 2){
-                  //go to MIDI menu
-                }
-                else{
-                  //go to GAIN menu
+                if(modeAndPlus < 2){
+                  menuPage = GAIN;
                 }
                 break;
               case MINUS:
                 minusAndSelect++;
-                if(minusAndSelect >= 2){
-                  //go to STRIPS menu
-                }
-                else{
-                  //go to STEPS menu
+                if(minusAndSelect < 2){
+                  menuPage = STEPS;
                 }
                 break;
               case SELECT:
                 minusAndSelect++;
-                if(minusAndSelect >= 2){
-                  //go to STRIPS menu
+                if(minusAndSelect < 2){
+                  menuPage = JAM;
                 }
                 else{
                   //go to JAM menu
+                  menuPage = JAM;
                 }
                 break;
               default:
                 break;
-            }
 
+            }
+            if(modeAndPlus >= 2){
+              menuPage = MIDI;
+            }
+            if(minusAndSelect >= 2){
+              menuPage = STRIPS;
+            }
+  updatePage();
   //is there another button longpressed?
 //  if()
 }
