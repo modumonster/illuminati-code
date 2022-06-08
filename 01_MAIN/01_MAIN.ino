@@ -17,11 +17,11 @@ bool TimerHandler0(struct repeating_timer *t)
   Serial.print("ITimer0: millis() = "); Serial.println(millis());
 #endif
 
-  CVRead();
-  CVtoLamp();
-  CVtoStrip();
+  //CVRead();
+  //CVtoLamp();
+  //CVtoStrip();
   LEDHandler();
-  printCV();
+  //printCV();
   return true;
 }
 
@@ -38,13 +38,14 @@ void setup(){
 
     
   ledsInit();
-  lampInit();
-  stripsInit();
-  CVInit();
-  buttonInit();
+  //lampInit();
+  //stripsInit();
+  //CVInit();
+  //buttonInit();
 
 }
 
 void loop(){
-  buttons();
+  //buttons();
+  ledTest();
 }
