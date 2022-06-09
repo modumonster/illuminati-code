@@ -63,30 +63,33 @@ void clickHandler(Button2& btn){
                   //for now no function
                 }
                 else if(btnId == PLUS){     //-5/-2.5/-0 minimum voltage
-                  nextMin(CV[selectedCV]);
+                  nextMin(CV[GselectedCV]);
                 }
                 else if(btnId == MINUS){    //5/2.5/0 maximum voltage
-                  nextMax(CV[selectedCV]);
+                  nextMax(CV[GselectedCV]);
                 }
                 else if(btnId == SELECT){
-                  selectedCV++;
-                  if(selectedCV > 7){
-                    selectedCV = 0;
+                  GselectedCV++;
+                  if(GselectedCV > 7){
+                    GselectedCV = 0;
                   }
                 }
               break;
             case DECAY:
                 if(btnId == MODE){
-
+                  //for now no use
                 }
                 else if(btnId == PLUS){
-                  
+                  nextRising(CV[DselectedCV]);
                 }
                 else if(btnId == MINUS){
-                  
+                  nextRising(CV[DselectedCV]);
                 }
                 else if(btnId == SELECT){
-                  
+                  DselectedCV++;
+                  if(DselectedCV > 7){
+                    DselectedCV = 0;
+                  }
                 }
               break;
             case STEPS:

@@ -15,7 +15,6 @@ const uint8_t LplusPin = 18;
 const uint8_t LminusPin = 17;
 const uint8_t LselectPin = 16;
 
-
 const uint8_t BmodePin = 12;
 const uint8_t BplusPin = 13;
 const uint8_t BminusPin = 14;

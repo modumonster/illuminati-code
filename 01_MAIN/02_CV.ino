@@ -194,3 +194,34 @@ void nextMax(CVstruct &data)
 
     Serial.print("max range is now "); Serial.println(data.rangeMax);
 }
+
+
+void nextRising(CVstruct &data) //i know this looks stupid, but I dont want to have more uints that are not really needed
+{
+    if(data.riseTime == rfTime[0]){
+      data.riseTime = rfTime[1];
+    }
+    else if (data.riseTime == rfTime[1]){
+      data.riseTime = rfTime[2];
+    }
+    else if (data.riseTime == rfTime[2]) {
+      data.riseTime = rfTime[0];
+    }
+
+    Serial.print("rise time is now"); Serial.print(data.riseTime); Serial.println(" ms");
+}
+
+void nextFalling(CVstruct &data)
+{
+    if(data.fallTime == rfTime[0]){
+      data.fallTime = rfTime[1];
+    }
+    else if (data.fallTime == rfTime[1]){
+      data.fallTime = rfTime[2];
+    }
+    else if (data.fallTime == rfTime[2]) {
+      data.fallTime = rfTime[0];
+    }
+
+    Serial.print("fall time is now"); Serial.print(data.fallTime); Serial.println(" ms");
+}

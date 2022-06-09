@@ -6,12 +6,17 @@ struct CVstruct{
   uint16_t rawValue;
   uint16_t rawLastValue;
 
+  //GAIN Min/Max
   double   rangeMin;
   double   rangeMax;
+
+  //DECAY times
+  uint8_t riseTime = 0;     //time in ms
+  uint8_t fallTime = 0;    //time in ms
   
   double   Volts;
   
-  double   Value;
+  double   Value;         //transformed from input using range to 0-255
   
   uint16_t p0; //gathered from calibration
   uint16_t p5; //gathered from calibration
@@ -21,6 +26,8 @@ struct CVstruct{
   uint16_t p2p5;
   
 };
+
+  const uint8_t rfTime[3] = {0,5,10};
 
 #define R 0
 #define G 1
@@ -72,4 +79,7 @@ LEDcolor selectLED      = {0,0,0};
 uint8_t menuPage = JAM;
 
 // GAIN MENU
-uint8_t selectedCV = 0;
+uint8_t GselectedCV = 0;
+
+//DECAY MENU
+uint8_t DselectedCV = 0;
