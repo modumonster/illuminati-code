@@ -1,4 +1,4 @@
-struct CV{
+struct CVstruct{
 //  uint8_t readPin;
 //  uint8_t switchPin;
 //  uint8_t mySwitch;
@@ -22,17 +22,15 @@ struct CV{
   
 };
 
-CV rCV, gCV, bCV, pCV, aCV, zCV;
-
-
-/*
 #define R 0
 #define G 1
 #define B 2
 #define P 3
 #define A 4
 #define Z 5
-*/
+
+CVstruct CV[7];
+
 
 //LEDs
 
@@ -72,3 +70,6 @@ LEDcolor selectLED      = {0,0,0};
 #define CAL 6
 
 uint8_t menuPage = JAM;
+
+// GAIN MENU
+uint8_t selectedCV = 0;

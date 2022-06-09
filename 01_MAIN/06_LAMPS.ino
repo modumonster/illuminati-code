@@ -35,14 +35,14 @@ double lastA = 0;
 double lastZ = 0;
 
 void CVtoLamp(){
-  double valA = mapd(aCV.Value,0,255,0,100);
+  double valA = mapd(CV[A].Value,0,255,0,100);
   if(lastA != valA){
   PWM_lampA->setPWM(lampAPin, lampPWMfreq, valA, true);
     lastA = valA;
     //printPWMInfo(PWM_lampA);
   }
   
-  double valZ = mapd(zCV.Value,0,255,0,100);
+  double valZ = mapd(CV[Z].Value,0,255,0,100);
   if(lastZ != valZ){
     PWM_lampZ->setPWM(lampZPin, lampPWMfreq, valZ, true);
     lastZ = valZ;

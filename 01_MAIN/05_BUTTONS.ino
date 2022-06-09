@@ -53,20 +53,26 @@ void buttons(){
 uint8_t modeAndPlus = 0;
 uint8_t minusAndSelect = 0;
 
+
 void clickHandler(Button2& btn){
  if (btn.getType() == single_click) {        
         uint8_t btnId = btn.getID();
           switch(menuPage){
             case GAIN:
                 if(btnId == MODE){
+                  //for now no function
                 }
-                else if(btnId == PLUS){
-                  //-5/-2.5/-0 minimum voltage
-                  nextMin(rCV);
+                else if(btnId == PLUS){     //-5/-2.5/-0 minimum voltage
+                  nextMin(CV[selectedCV]);
                 }
-                else if(btnId == MINUS){
+                else if(btnId == MINUS){    //5/2.5/0 maximum voltage
+                  nextMax(CV[selectedCV]);
                 }
                 else if(btnId == SELECT){
+                  selectedCV++;
+                  if(selectedCV > 7){
+                    selectedCV = 0;
+                  }
                 }
               break;
             case DECAY:
