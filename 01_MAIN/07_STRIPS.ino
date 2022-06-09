@@ -26,7 +26,7 @@ void stripATest() {
   }
 }
 uint8_t Sintensity = 255;
-
+/*
 void CVtoStrip() {
   stripA.clear();
   uint8_t red = map(CVValues[R],(Rmin+Rmax)/2,Rmax,0,Sintensity);
@@ -38,3 +38,5 @@ void CVtoStrip() {
   }
   stripA.show();   // Send the updated pixel colors to the hardware.
 }
+
+*/

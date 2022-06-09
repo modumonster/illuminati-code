@@ -39,3 +39,15 @@ const uint8_t stripZPin = 3;
 #define CAL 6
 
 uint8_t menuPage = JAM;
+
+
+
+
+
+double mapd(double x, double in_min, double in_max, double out_min, double out_max)
+{
+    double out = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    if(out > out_max) out = out_max;
+    if(out < out_min) out = out_min;
+    return out;
+}

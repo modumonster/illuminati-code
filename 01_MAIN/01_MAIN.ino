@@ -19,9 +19,9 @@ bool TimerHandler0(struct repeating_timer *t)
 #endif
 
   CVRead();
-  CVtoLamp();
-  CVtoStrip();
-  //printCV();
+  //CVtoLamp();
+  //CVtoStrip();
+  printCV();
   return true;
 }
 

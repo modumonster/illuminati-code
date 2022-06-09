@@ -34,12 +34,7 @@ void printPWMInfo(RP2040_PWM* PWM_Instance)
   PWM_LOGDEBUG5("TOP =", top, ", DIV =", div, ", CPU_freq =", PWM_Instance->get_freq_CPU());
 }
 
-
-double mapd(double x, double in_min, double in_max, double out_min, double out_max)
-{
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-
+/*
 void CVtoLamp(){
   if(lastA != CVValues[A]){
     double valA = mapd(CVValues[A],(Amin+Amax)/2,Amax,0,100);
@@ -63,3 +58,4 @@ void testLamp(){
     delay(10);
   }
 }
+*/
