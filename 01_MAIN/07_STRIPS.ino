@@ -1,8 +1,5 @@
-uint8_t APixels = 16; // Popular NeoPixel ring size
-uint8_t ZPixels = 16;
-
-Adafruit_NeoPixel stripA(APixels, stripAPin, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel stripZ(ZPixels, stripZPin, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripA(strip_A.pixels, stripAPin, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripZ(strip_Z.pixels, stripZPin, NEO_GRB + NEO_KHZ800);
 
 void stripsInit(){
   stripA.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)

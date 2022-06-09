@@ -98,33 +98,6 @@ void LEDHandler(){
   if(LHandlerState>3)LHandlerState = 0;
 }
 
-void updatePage(){
-  switch(menuPage){
-    case GAIN:
-      modeLED = RED;
-      break;
-    case DECAY:
-      modeLED = GREEN;
-      break;
-    case STEPS:
-      modeLED = BLUE;
-      break;
-    case JAM:
-      modeLED = YELLOW;
-      break;
-    case MIDI:
-      modeLED = CYAN;
-      break;
-    case STRIPS:
-      modeLED = MAGENTA;
-      break;
-    case CAL:
-      modeLED = OFF;
-      break;
-  }
-  
-}
-
 void resetLEDs(){
     modeLED = OFF;
     plusLED = OFF;

@@ -193,7 +193,6 @@ void clickHandler(Button2& btn){
     Serial.print("on button #");
     Serial.println(btn.getID());
 }
-  //else if double_click
 }
 void lpHandler(Button2& btn){
   uint16_t time = btn.wasPressedFor();
@@ -211,28 +210,28 @@ void lpDetectedHandler(Button2& btn){
       modeAndPlus++;
       if(modeAndPlus < 2){
         menuPage = DECAY;
+        modeLED = GREEN;
       }
       break;
     case PLUS:
       modeAndPlus++;
       if(modeAndPlus < 2){
         menuPage = GAIN;
+        modeLED = RED;
       }
       break;
     case MINUS:
       minusAndSelect++;
       if(minusAndSelect < 2){
         menuPage = STEPS;
+        modeLED = BLUE;
       }
       break;
     case SELECT:
       minusAndSelect++;
       if(minusAndSelect < 2){
         menuPage = JAM;
-      }
-      else{
-        //go to JAM menu
-        menuPage = JAM;
+        modeLED = YELLOW;
       }
       break;
     default:
@@ -241,9 +240,10 @@ void lpDetectedHandler(Button2& btn){
   }
   if(modeAndPlus >= 2){
     menuPage = MIDI;
+    modeLED = CYAN;
   }
   if(minusAndSelect >= 2){
     menuPage = STRIPS;
+    modeLED = MAGENTA;
   }
-  updatePage();
 }

@@ -184,12 +184,15 @@ void nextMax(CVstruct &data)
 {
     if(data.rangeMax == data.p0){
       data.rangeMax = data.p2p5;
+      minusLED = RED;
     }
     else if (data.rangeMax == data.p2p5){
       data.rangeMax = data.p5;
+      minusLED = GREEN;
     }
     else if (data.rangeMax == data.p5) {
       data.rangeMax = data.p0;
+      //minusLED = BLUE; - this somehow breaks something with LEDs, will turn off for now
     }
 
     Serial.print("max range is now "); Serial.println(data.rangeMax);
@@ -200,12 +203,15 @@ void nextRising(CVstruct &data) //i know this looks stupid, but I dont want to h
 {
     if(data.riseTime == rfTime[0]){
       data.riseTime = rfTime[1];
+      plusLED = RED;
     }
     else if (data.riseTime == rfTime[1]){
       data.riseTime = rfTime[2];
+      plusLED = GREEN;
     }
     else if (data.riseTime == rfTime[2]) {
       data.riseTime = rfTime[0];
+      plusLED = BLUE;
     }
 
     Serial.print("rise time is now"); Serial.print(data.riseTime); Serial.println(" ms");
@@ -215,12 +221,15 @@ void nextFalling(CVstruct &data)
 {
     if(data.fallTime == rfTime[0]){
       data.fallTime = rfTime[1];
+      minusLED = GREEN;
     }
     else if (data.fallTime == rfTime[1]){
       data.fallTime = rfTime[2];
+      //minusLED = BLUE; - breaks
     }
     else if (data.fallTime == rfTime[2]) {
       data.fallTime = rfTime[0];
+      minusLED = RED;
     }
 
     Serial.print("fall time is now"); Serial.print(data.fallTime); Serial.println(" ms");
