@@ -19,9 +19,6 @@ void lampInit(){
   }
 
 }
-uint16_t lastA = 0;
-uint16_t lastZ = 0;
-
 
 
 void printPWMInfo(RP2040_PWM* PWM_Instance)
@@ -34,19 +31,22 @@ void printPWMInfo(RP2040_PWM* PWM_Instance)
   PWM_LOGDEBUG5("TOP =", top, ", DIV =", div, ", CPU_freq =", PWM_Instance->get_freq_CPU());
 }
 
-/*
+double lastA = 0;
+double lastZ = 0;
+
 void CVtoLamp(){
-  if(lastA != CVValues[A]){
-    double valA = mapd(CVValues[A],(Amin+Amax)/2,Amax,0,100);
+  double valA = mapd(aCV.Value,0,255,0,100);
+  Serial.println(valA);
+  if(lastA != valA){
   PWM_lampA->setPWM(lampAPin, lampPWMfreq, valA, true);
-    lastA = CVValues[A];
+    lastA = valA;
     //printPWMInfo(PWM_lampA);
   }
-
-  if(lastZ != CVValues[Z]){
-    double valZ = mapd(CVValues[Z],(Zmin+Zmax)/2,Zmax,0,100);
+  
+  double valZ = mapd(zCV.Value,0,255,0,100);
+  if(lastZ != valZ){
     PWM_lampZ->setPWM(lampZPin, lampPWMfreq, valZ, true);
-    lastZ = CVValues[Z];
+    lastZ = valZ;
   }
 }
 
@@ -58,4 +58,3 @@ void testLamp(){
     delay(10);
   }
 }
-*/

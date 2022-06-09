@@ -5,7 +5,7 @@
 #include <Adafruit_NeoPixel.h>
 
 #include "HW.h"
-
+#include "Structure.h"
 #define TIMER0_INTERVAL_uS        1000
 RPI_PICO_Timer ITimer0(0);
 RPI_PICO_Timer ITimer1(1);
@@ -19,8 +19,8 @@ bool TimerHandler0(struct repeating_timer *t)
 #endif
 
   CVRead();
-  //CVtoLamp();
-  //CVtoStrip();
+  CVtoLamp();
+  CVtoStrip();
   printCV();
   return true;
 }

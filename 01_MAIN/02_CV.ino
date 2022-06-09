@@ -1,41 +1,3 @@
-uint16_t CVValues[6] = {0}; //soon to be deleted
-double CVControls[6] = {0};
-
-
-struct CV{
-//  uint8_t readPin;
-//  uint8_t switchPin;
-//  uint8_t mySwitch;
-
-  uint16_t rawValue;
-  uint16_t rawLastValue;
-
-  double   rangeMin;
-  double   rangeMax;
-  
-  double   Volts;
-  
-  double   Value;
-  
-  uint16_t p0; //gathered from calibration
-  uint16_t p5; //gathered from calibration
-
-  uint16_t m5; //calculated from calibration (int for -5V)
-  uint16_t m2p5;  //(int for -2.5V)
-  uint16_t p2p5;
-  
-};
-
-
-CV rCV, gCV, bCV, pCV, aCV, zCV;
-
-#define R 0
-#define G 1
-#define B 2
-#define P 3
-#define A 4
-#define Z 5
-
 void CVInit(){
   analogReadResolution(12);
   pinMode(rgCVPin, INPUT);
@@ -82,10 +44,10 @@ void CVInit(){
   pCV.rangeMin = pCV.m5;
   pCV.rangeMax = pCV.p5;
 
-  aCV.rangeMin = aCV.m5;
+  aCV.rangeMin = aCV.p0;
   aCV.rangeMax = aCV.p5;
 
-  zCV.rangeMin = zCV.m5;
+  zCV.rangeMin = zCV.p0;
   zCV.rangeMax = zCV.p5;
   printRanges();
 }

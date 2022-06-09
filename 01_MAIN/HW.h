@@ -28,22 +28,6 @@ const uint8_t stripAPin = 2;
 const uint8_t stripZPin = 3;
 
 
-
-
-#define GAIN 0
-#define DECAY 1
-#define STEPS 2
-#define JAM 3
-#define MIDI 4
-#define STRIPS 5
-#define CAL 6
-
-uint8_t menuPage = JAM;
-
-
-
-
-
 double mapd(double x, double in_min, double in_max, double out_min, double out_max)
 {
     double out = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;

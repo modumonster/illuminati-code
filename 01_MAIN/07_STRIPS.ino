@@ -26,17 +26,15 @@ void stripATest() {
   }
 }
 uint8_t Sintensity = 255;
-/*
+
 void CVtoStrip() {
   stripA.clear();
-  uint8_t red = map(CVValues[R],(Rmin+Rmax)/2,Rmax,0,Sintensity);
-  uint8_t green = map(CVValues[G],(Gmin+Gmax)/2,Gmax,0,Sintensity);
-  uint8_t blue = map(CVValues[B],(Bmin+Bmax)/2,Bmax,0,Sintensity);
+  uint8_t red = map(rCV.Value,0,255,0,Sintensity);
+  uint8_t green = map(gCV.Value,0,255,0,Sintensity);
+  uint8_t blue = map(bCV.Value,0,255,0,Sintensity);
   //Serial.print(red);Serial.print(" - ");Serial.print(green);Serial.print(" - ");Serial.println(blue);
   for(uint8_t i = 0; i<APixels; i++){
   stripA.setPixelColor(i, stripA.Color(red,green,blue));
   }
   stripA.show();   // Send the updated pixel colors to the hardware.
 }
-
-*/
