@@ -36,7 +36,6 @@ double lastZ = 0;
 
 void CVtoLamp(){
   double valA = mapd(aCV.Value,0,255,0,100);
-  Serial.println(valA);
   if(lastA != valA){
   PWM_lampA->setPWM(lampAPin, lampPWMfreq, valA, true);
     lastA = valA;

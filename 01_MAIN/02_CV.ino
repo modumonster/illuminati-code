@@ -1,3 +1,4 @@
+
 void CVInit(){
   analogReadResolution(12);
   pinMode(rgCVPin, INPUT);
@@ -159,4 +160,38 @@ void calibrateCV(){
 
 
   calcRanges();
+}
+
+void nextMin(CV &data)
+{
+    if(data.rangeMin == data.m5){
+      data.rangeMin = data.m2p5;
+      plusLED = RED;
+    }
+    else if (data.rangeMin == data.m2p5){
+      data.rangeMin = data.p0;
+      plusLED = GREEN;
+    }
+    else if (data.rangeMin == data.p0){
+      data.rangeMin = data.m5;
+      plusLED = BLUE;
+    }
+    
+    Serial.print("min range is now "); Serial.println(data.rangeMin);
+}
+
+
+void nextMax(CV &data)
+{
+    if(data.rangeMax == data.p0){
+      data.rangeMax = data.p2p5;
+    }
+    else if (data.rangeMax == data.p2p5){
+      data.rangeMax = data.p5;
+    }
+    else if (data.rangeMax == data.p5) {
+      data.rangeMax = data.p0;
+    }
+
+    Serial.print("max range is now "); Serial.println(data.rangeMax);
 }

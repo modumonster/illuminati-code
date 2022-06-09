@@ -34,6 +34,31 @@ CV rCV, gCV, bCV, pCV, aCV, zCV;
 #define Z 5
 */
 
+//LEDs
+
+struct LEDcolor{
+  uint8_t r; //0-255
+  uint8_t g;
+  uint8_t b;
+};
+
+double Lintensity = 100.0;
+
+const LEDcolor RED      = {255,0,0};
+const LEDcolor GREEN    = {0,255,0};
+const LEDcolor BLUE     = {0,0,255};
+
+const LEDcolor YELLOW   = {255,255,0};
+const LEDcolor CYAN     = {0,255,255};
+const LEDcolor MAGENTA  = {255,0,255};
+
+const LEDcolor OFF     = {0,0,0};
+
+LEDcolor modeLED        = {0,0,0};
+LEDcolor plusLED        = {0,0,0};
+LEDcolor minusLED       = {0,0,0};
+LEDcolor selectLED      = {0,0,0};
+
 
 
 //MENU

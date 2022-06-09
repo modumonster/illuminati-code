@@ -59,16 +59,14 @@ void clickHandler(Button2& btn){
           switch(menuPage){
             case GAIN:
                 if(btnId == MODE){
-                  selectLED = RED; //this is temporary, just to test menu
                 }
                 else if(btnId == PLUS){
-                  selectLED = GREEN;
+                  //-5/-2.5/-0 minimum voltage
+                  nextMin(rCV);
                 }
                 else if(btnId == MINUS){
-                  selectLED = BLUE;
                 }
                 else if(btnId == SELECT){
-                  selectLED = YELLOW;
                 }
               break;
             case DECAY:
