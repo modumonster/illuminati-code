@@ -92,32 +92,55 @@ void clickHandler(Button2& btn){
                   }
                 }
               break;
-            case STEPS:
+            case STEPS: //should be probably renamed to something like animation/program
                 if(btnId == MODE){
-
+                  
                 }
                 else if(btnId == PLUS){
-                  
+                  //steps randomize or somehow control steps
                 }
                 else if(btnId == MINUS){
-                  
+                  // type - trig->random, trig->next, V/OCT steps,
+                  if(AselectedStrip == STRIP_BOTH){
+                    strip_A.reaction = strip_A.reaction;
+                    strip_A.reaction++;
+                    if(strip_A.reaction > 3){
+                      strip_A.reaction = 0;
+                    }
+                    strip_Z.reaction = strip_A.reaction;
+                  }
+                  else if (AselectedStrip == STRIP_A){
+                    strip_A.reaction++;
+                    if(strip_A.reaction > 3){
+                      strip_A.reaction = 0;
+                    }
+                  }
+                  else if (AselectedStrip == STRIP_Z){
+                    strip_Z.reaction++;
+                    if(strip_Z.reaction > 3){
+                      strip_Z.reaction = 0;
+                    }
+                  }
                 }
-                else if(btnId == SELECT){
-                  
+                else if(btnId == SELECT){ //both /set for RGB strip A/ strip Z RGB
+                  AselectedStrip++;
+                  if(AselectedStrip > 2){
+                    AselectedStrip = 0;
+                  }
                 }
               break;
             case JAM:
                 if(btnId == MODE){
-
+                  //go to black
                 }
                 else if(btnId == PLUS){
-                  
+                  //pause animation
                 }
                 else if(btnId == MINUS){
-                  
+                  //next animation
                 }
                 else if(btnId == SELECT){
-                  
+                  //invert all signals
                 }
               break;
             case MIDI:

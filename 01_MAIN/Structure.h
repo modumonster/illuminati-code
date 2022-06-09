@@ -65,6 +65,25 @@ LEDcolor minusLED       = {0,0,0};
 LEDcolor selectLED      = {0,0,0};
 
 
+//STRIPS
+
+#define TRIG_RANDOM 0 //reaction to program signal
+#define TRIG_NEXT   1
+#define VOCT_STEPS  2
+
+struct strip{
+  uint8_t pixels = 16;
+
+  uint8_t reaction; // TRIG_RANDOM, TRIG_NEXT, VOCT_STEPS (8 steps)
+  uint8_t steps[8] = {0,1,2,3,4,5,6,7};
+
+  uint8_t intensity = 255; //0-255
+};
+
+strip strip_A;
+strip strip_Z;
+
+
 
 //MENU
 
@@ -83,3 +102,9 @@ uint8_t GselectedCV = 0;
 
 //DECAY MENU
 uint8_t DselectedCV = 0;
+
+//STEPS/ANIMATION/PROGRAM MENU
+uint8_t AselectedStrip = 0;
+#define STRIP_BOTH  0
+#define STRIP_A     1
+#define STRIP_Z     2
