@@ -165,15 +165,12 @@ void nextMin(CVstruct &data)
 {
   if(data.rangeMin == data.m5){
     data.rangeMin = data.m2p5;
-    plusLED = RED;
   }
   else if (data.rangeMin == data.m2p5){
     data.rangeMin = data.p0;
-    plusLED = GREEN;
   }
   else if (data.rangeMin == data.p0){
     data.rangeMin = data.m5;
-    plusLED = BLUE;
   }
 }
 
@@ -191,38 +188,5 @@ void nextMax(CVstruct &data)
   else if (data.rangeMax == data.p5) {
     data.rangeMax = data.p0;
     minusLED = BLUE;
-  }
-}
-
-
-void nextRise(CVstruct &data) //i know this looks stupid, but I dont want to have more uints that are not really needed
-{
-  if(data.riseTime == rfTime[0]){
-    data.riseTime = rfTime[1];
-    plusLED = RED;
-  }
-  else if (data.riseTime == rfTime[1]){
-    data.riseTime = rfTime[2];
-    plusLED = GREEN;
-  }
-  else if (data.riseTime == rfTime[2]) {
-    data.riseTime = rfTime[0];
-    plusLED = BLUE;
-  }
-}
-
-void nextFall(CVstruct &data)
-{
-  if(data.fallTime == rfTime[0]){
-    data.fallTime = rfTime[1];
-    minusLED = GREEN;
-  }
-  else if (data.fallTime == rfTime[1]){
-    data.fallTime = rfTime[2];
-    minusLED = BLUE;
-  }
-  else if (data.fallTime == rfTime[2]) {
-    data.fallTime = rfTime[0];
-    minusLED = RED;
   }
 }

@@ -96,6 +96,8 @@ void updateLEDs(){
       break;
     case DECAY:
       modeLED = MENUcolor[DECAY];
+      plusLED = RFcolor[CV[DselectedCV].riseTime];
+      minusLED = RFcolor[CV[DselectedCV].fallTime];
       selectLED = CVcolor[DselectedCV];
       break;
     case STEPS:

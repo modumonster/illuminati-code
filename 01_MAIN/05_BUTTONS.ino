@@ -85,11 +85,17 @@ void clickHandler(Button2& btn){
               Serial.println("DECAY\t| Mode pressed");
             }
             else if(btnId == PLUS){
-              nextRise(CV[DselectedCV]);
+              CV[DselectedCV].riseTime++;
+              if(CV[DselectedCV].riseTime > 2){
+                CV[DselectedCV].riseTime = 0;
+              }
               Serial.print("DECAY\t| Rise of CV ");Serial.print(DselectedCV); Serial.print(" set to "); Serial.println(CV[DselectedCV].riseTime);
             }
             else if(btnId == MINUS){
-              nextFall(CV[DselectedCV]);
+              CV[DselectedCV].fallTime++;
+              if(CV[DselectedCV].fallTime > 2){
+                CV[DselectedCV].fallTime = 0;
+              }
               Serial.print("DECAY\t| Fall of CV ");Serial.print(DselectedCV); Serial.print(" set to "); Serial.println(CV[DselectedCV].fallTime);
             }
             else if(btnId == SELECT){

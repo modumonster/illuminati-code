@@ -11,8 +11,8 @@ struct CVstruct{
   double   rangeMax;
 
   //DECAY times
-  uint8_t riseTime = 0;     //time in ms
-  uint8_t fallTime = 0;    //time in ms
+  uint8_t riseTime = 0; // 0->0ms, 1->5ms, 2->10ms
+  uint8_t fallTime = 0; // 0->0ms, 1->5ms, 2->10ms
   
   double   Volts;
   
@@ -26,6 +26,9 @@ struct CVstruct{
   uint16_t p2p5;
   
 };
+
+
+
 
 const uint8_t rfTime[3] = {0,5,10}; //selectable rise/fall times [ms]
 
@@ -62,7 +65,7 @@ const LEDcolor OFF     = {0,0,0};
 const LEDcolor CVcolor[6] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
 const LEDcolor STRIPcolor[3] = {RED,GREEN,BLUE};
 const LEDcolor MENUcolor[7] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF};
-
+const LEDcolor RFcolor[3] = {RED,GREEN,BLUE}; // 0ms, 5ms, 10ms
 LEDcolor modeLED        = {0,0,0};
 LEDcolor plusLED        = {0,0,0};
 LEDcolor minusLED       = {0,0,0};
