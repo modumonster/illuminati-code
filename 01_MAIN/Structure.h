@@ -7,9 +7,12 @@ struct CVstruct{
   uint16_t rawLastValue;
 
   //GAIN Min/Max
-  double   rangeMin;
+  double   rangeMin; //should be later deleted and only p0,p5 etc. and indexes will be used
   double   rangeMax;
 
+  uint8_t minIndex = 0; // 0->m5, 1->m2p5, 2->p0
+  uint8_t maxIndex = 0; // 0->p5, 1->p2p5, 2->p0
+  
   //DECAY times
   uint8_t riseTime = 0; // 0->0ms, 1->5ms, 2->10ms
   uint8_t fallTime = 0; // 0->0ms, 1->5ms, 2->10ms
@@ -66,6 +69,8 @@ const LEDcolor CVcolor[6] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
 const LEDcolor STRIPcolor[3] = {RED,GREEN,BLUE};
 const LEDcolor MENUcolor[7] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF};
 const LEDcolor RFcolor[3] = {RED,GREEN,BLUE}; // 0ms, 5ms, 10ms
+const LEDcolor GAINMINcolor[3] = {RED,GREEN,BLUE};
+const LEDcolor GAINMAXcolor[3] = {RED,GREEN,BLUE};
 LEDcolor modeLED        = {0,0,0};
 LEDcolor plusLED        = {0,0,0};
 LEDcolor minusLED       = {0,0,0};

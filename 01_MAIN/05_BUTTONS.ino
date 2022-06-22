@@ -64,12 +64,18 @@ void clickHandler(Button2& btn){
               Serial.println("GAIN\t| Mode pressed");
             }
             else if(btnId == PLUS){     //-5/-2.5/-0 minimum voltage
-              nextMin(CV[GselectedCV]);
-              Serial.print("GAIN\t| Min of CV ");Serial.print(GselectedCV); Serial.print(" set to "); Serial.println(CV[GselectedCV].rangeMin);
+              CV[GselectedCV].minIndex++;
+              if(CV[GselectedCV].minIndex > 2){
+                CV[GselectedCV].minIndex = 0;
+              }              
+              Serial.print("GAIN\t| Min of CV ");Serial.print(GselectedCV); Serial.print(" set to "); Serial.println(CV[GselectedCV].minIndex);
             }
             else if(btnId == MINUS){    //5/2.5/0 maximum voltage
-              nextMax(CV[GselectedCV]);
-              Serial.print("GAIN\t| Max of CV ");Serial.print(GselectedCV); Serial.print(" set to "); Serial.println(CV[GselectedCV].rangeMax);
+              CV[GselectedCV].maxIndex++;
+              if(CV[GselectedCV].maxIndex > 2){
+                CV[GselectedCV].maxIndex = 0;
+              }
+              Serial.print("GAIN\t| Max of CV ");Serial.print(GselectedCV); Serial.print(" set to "); Serial.println(CV[GselectedCV].maxIndex);
             }
             else if(btnId == SELECT){
               GselectedCV++;

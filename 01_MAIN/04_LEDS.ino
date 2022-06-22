@@ -92,6 +92,8 @@ void updateLEDs(){
   switch(menuPage){
     case GAIN:
       modeLED = MENUcolor[GAIN];
+      plusLED = GAINMINcolor[CV[GselectedCV].minIndex];
+      minusLED = GAINMAXcolor[CV[GselectedCV].maxIndex];
       selectLED = CVcolor[GselectedCV];
       break;
     case DECAY:
