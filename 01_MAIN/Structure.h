@@ -1,8 +1,4 @@
 struct CVstruct{
-//  uint8_t readPin;
-//  uint8_t switchPin;
-//  uint8_t mySwitch;
-
   uint16_t rawValue;
   uint16_t rawLastValue;
 
@@ -15,20 +11,15 @@ struct CVstruct{
   uint8_t fallTime = 0; // 0->0ms, 1->5ms, 2->10ms
   
   double   Volts;
+  double   Value;       //transformed from input using range to 0-255
   
-  double   Value;         //transformed from input using range to 0-255
-  
-  uint16_t p0; //gathered from calibration
-  uint16_t p5; //gathered from calibration
+  uint16_t p0;          //gathered from calibration
+  uint16_t p5;          //gathered from calibration
 
-  uint16_t m5; //calculated from calibration (int for -5V)
-  uint16_t m2p5;  //(int for -2.5V)
+  uint16_t m5;          //calculated from calibration (int for -5V)
+  uint16_t m2p5;        //(int for -2.5V)
   uint16_t p2p5;
-  
 };
-
-
-
 
 const uint8_t rfTime[3] = {0,5,10}; //selectable rise/fall times [ms]
 
@@ -40,9 +31,6 @@ const uint8_t rfTime[3] = {0,5,10}; //selectable rise/fall times [ms]
 #define Z 5
 
 CVstruct CV[7];
-
-
-//LEDs
 
 struct LEDcolor{
   uint8_t r; //0-255
@@ -60,21 +48,20 @@ const LEDcolor YELLOW   = {255,255,0};
 const LEDcolor CYAN     = {0,255,255};
 const LEDcolor MAGENTA  = {255,0,255};
 
-const LEDcolor OFF     = {0,0,0};
+const LEDcolor OFF      = {0,0,0};
 
-const LEDcolor CVcolor[6] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
-const LEDcolor STRIPcolor[3] = {RED,GREEN,BLUE};
-const LEDcolor MENUcolor[7] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF};
-const LEDcolor RFcolor[3] = {RED,GREEN,BLUE}; // 0ms, 5ms, 10ms
-const LEDcolor GAINMINcolor[3] = {RED,GREEN,BLUE};
-const LEDcolor GAINMAXcolor[3] = {RED,GREEN,BLUE};
-const LEDcolor REACTcolor[4] = {RED,GREEN,BLUE,YELLOW};
+const LEDcolor CVcolor[6]       = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
+const LEDcolor STRIPcolor[3]    = {RED,GREEN,BLUE};
+const LEDcolor MENUcolor[7]     = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF};
+const LEDcolor RFcolor[3]       = {RED,GREEN,BLUE}; // 0ms, 5ms, 10ms
+const LEDcolor GAINMINcolor[3]  = {RED,GREEN,BLUE};
+const LEDcolor GAINMAXcolor[3]  = {RED,GREEN,BLUE};
+const LEDcolor REACTcolor[4]    = {RED,GREEN,BLUE,YELLOW};
 
 LEDcolor modeLED        = {0,0,0};
 LEDcolor plusLED        = {0,0,0};
 LEDcolor minusLED       = {0,0,0};
 LEDcolor selectLED      = {0,0,0};
-
 
 //STRIPS
 
@@ -93,8 +80,6 @@ struct strip{
 
 strip strip_A;
 strip strip_Z;
-
-
 
 //MENU
 

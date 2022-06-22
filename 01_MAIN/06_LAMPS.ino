@@ -1,13 +1,11 @@
 const double lampPWMfreq = 9000.0; //Hz
-double dutyA = 50.0;
-double dutyZ = 50.0;
 
 RP2040_PWM* PWM_lampA;
 RP2040_PWM* PWM_lampZ;
 
 void lampInit(){
-  PWM_lampA = new RP2040_PWM(lampAPin, lampPWMfreq, dutyA);
-  PWM_lampZ = new RP2040_PWM(lampZPin, lampPWMfreq, dutyZ);
+  PWM_lampA = new RP2040_PWM(lampAPin, lampPWMfreq, 100.0);
+  PWM_lampZ = new RP2040_PWM(lampZPin, lampPWMfreq, 100.0);
 
   if (PWM_lampA)
   {
@@ -17,7 +15,6 @@ void lampInit(){
   {
     PWM_lampZ->setPWM();
   }
-
 }
 
 
@@ -48,6 +45,10 @@ void CVtoLamp(){
     lastZ = valZ;
   }
 }
+
+
+double dutyA = 50.0;
+double dutyZ = 50.0;
 
 void testLamp(){
   for(dutyA = 0.0; dutyA <= 100.0; dutyA = dutyA+0.1){

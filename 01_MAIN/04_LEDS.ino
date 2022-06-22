@@ -19,9 +19,9 @@ void ledsInit(){
   PWM_ledG = new RP2040_PWM(LgreenPin,  ledPWMfreq, 50.0);
   PWM_ledB = new RP2040_PWM(LbluePin,   ledPWMfreq, 50.0);
 
-  if (PWM_ledR)PWM_ledR->setPWM();
-  if (PWM_ledG)PWM_ledG->setPWM();
-  if (PWM_ledB)PWM_ledB->setPWM();
+  if (PWM_ledR) PWM_ledR->setPWM();
+  if (PWM_ledG) PWM_ledG->setPWM();
+  if (PWM_ledB) PWM_ledB->setPWM();
 
   digitalWrite(LmodePin,  LOW);
   digitalWrite(LplusPin,  LOW);
@@ -78,33 +78,35 @@ void LEDHandler(){
   }
   
   LHandlerState++;
-  if(LHandlerState>7)LHandlerState = 0;
+  if(LHandlerState>7){
+    LHandlerState = 0;
+  }
 }
 
 void resetLEDs(){
-    modeLED = OFF;
-    plusLED = OFF;
-    minusLED = OFF;
-    selectLED = OFF;
+  modeLED = OFF;
+  plusLED = OFF;
+  minusLED = OFF;
+  selectLED = OFF;
 }
 
 void updateLEDs(){
   switch(menuPage){
     case GAIN:
-      modeLED = MENUcolor[GAIN];
-      plusLED = GAINMINcolor[CV[GselectedCV].minIndex];
-      minusLED = GAINMAXcolor[CV[GselectedCV].maxIndex];
+      modeLED   = MENUcolor[GAIN];
+      plusLED   = GAINMINcolor[CV[GselectedCV].minIndex];
+      minusLED  = GAINMAXcolor[CV[GselectedCV].maxIndex];
       selectLED = CVcolor[GselectedCV];
       break;
     case DECAY:
-      modeLED = MENUcolor[DECAY];
-      plusLED = RFcolor[CV[DselectedCV].riseTime];
-      minusLED = RFcolor[CV[DselectedCV].fallTime];
+      modeLED   = MENUcolor[DECAY];
+      plusLED   = RFcolor[CV[DselectedCV].riseTime];
+      minusLED  = RFcolor[CV[DselectedCV].fallTime];
       selectLED = CVcolor[DselectedCV];
       break;
     case STEPS:
-      modeLED = MENUcolor[STEPS];
-      plusLED = MENUcolor[STEPS]; //for now just same as STEPS
+      modeLED   = MENUcolor[STEPS];
+      plusLED   = MENUcolor[STEPS]; //for now just same as STEPS
       if(AselectedStrip == STRIP_BOTH || AselectedStrip == STRIP_A){
         minusLED = REACTcolor[strip_A.reaction];
       }
@@ -114,19 +116,28 @@ void updateLEDs(){
       selectLED = STRIPcolor[AselectedStrip];
       break;
     case JAM:
-      modeLED = MENUcolor[JAM];
-      plusLED = YELLOW;
-      minusLED = YELLOW;
-      selectLED = YELLOW;
+      modeLED   = MENUcolor[JAM];
+      plusLED   = MENUcolor[JAM];
+      minusLED  = MENUcolor[JAM];
+      selectLED = MENUcolor[JAM];
       break;
     case MIDI:
-      modeLED = MENUcolor[MIDI];
+      modeLED   = MENUcolor[MIDI];
+      plusLED   = MENUcolor[MIDI];
+      minusLED  = MENUcolor[MIDI];
+      selectLED = MENUcolor[MIDI];
       break;
     case STRIPS:
-      modeLED = MENUcolor[STRIPS];
+      modeLED   = MENUcolor[STRIPS];
+      plusLED   = MENUcolor[STRIPS];
+      minusLED  = MENUcolor[STRIPS];
+      selectLED = MENUcolor[STRIPS];
       break;
     case CAL:
-      modeLED = MENUcolor[CAL];
+      modeLED   = MENUcolor[CAL];
+      plusLED   = MENUcolor[CAL];
+      minusLED  = MENUcolor[CAL];
+      selectLED = MENUcolor[CAL];
       break;
   }
 }

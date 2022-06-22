@@ -33,7 +33,6 @@ void buttonInit(){
   btnPlus.setLongClickTime(longPressMillis);
   btnMinus.setLongClickTime(longPressMillis);
   btnSelect.setLongClickTime(longPressMillis);
-
 }
 
 #define MODE    4
@@ -48,11 +47,8 @@ void buttons(){
   btnSelect.loop();
 }
 
-
-
 uint8_t modeAndPlus = 0;
 uint8_t minusAndSelect = 0;
-
 
 void clickHandler(Button2& btn){
   if (btn.getType() == single_click) {        
@@ -60,7 +56,6 @@ void clickHandler(Button2& btn){
       switch(menuPage){
         case GAIN:
             if(btnId == MODE){
-              //for now no function
               Serial.println("GAIN\t| Mode pressed");
             }
             else if(btnId == PLUS){     //-5/-2.5/-0 minimum voltage
@@ -87,7 +82,6 @@ void clickHandler(Button2& btn){
           break;
         case DECAY:
             if(btnId == MODE){
-              //for now no use
               Serial.println("DECAY\t| Mode pressed");
             }
             else if(btnId == PLUS){
@@ -112,16 +106,14 @@ void clickHandler(Button2& btn){
             Serial.print("DECAY\t| Selected CV is now ");Serial.println(DselectedCV);
             }
           break;
-        case STEPS: //should be probably renamed to something like animation/program
+        case STEPS:                                       //should be probably renamed to something like animation/program
             if(btnId == MODE){
               Serial.println("STEPS \t| Mode pressed");
             }
             else if(btnId == PLUS){
-              //steps randomize or somehow control steps
-              Serial.println("STEPS \t| Plus pressed");
+              Serial.println("STEPS \t| Plus pressed");   //steps randomize or somehow control steps
             }
-            else if(btnId == MINUS){
-              // type - trig->random, trig->next, V/OCT steps,
+            else if(btnId == MINUS){                      // type - trig->random, trig->next, V/OCT steps,
               if(AselectedStrip == STRIP_BOTH){
                 strip_A.reaction = strip_A.reaction;
                 strip_A.reaction++;
@@ -219,6 +211,7 @@ void clickHandler(Button2& btn){
   }
   updateLEDs();
 }
+
 void lpHandler(Button2& btn){
   uint16_t time = btn.wasPressedFor();
     if(btn.getID() == MODE || btn.getID() == PLUS){

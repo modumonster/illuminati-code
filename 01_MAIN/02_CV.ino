@@ -1,4 +1,3 @@
-
 void CVInit(){
   analogReadResolution(12);
   pinMode(rgCVPin, INPUT);
@@ -42,7 +41,7 @@ const bool readGPZ = 1;
 
 bool CVswitch = readRBA;
 
-void calcVolts(){
+void calcVolts(){ //need to do this better
   CV[R].Volts = mapd(CV[R].rawValue,CV[R].m5,CV[R].p5,-5,5);
   CV[G].Volts = mapd(CV[G].rawValue,CV[G].m5,CV[G].p5,-5,5);
   CV[B].Volts = mapd(CV[B].rawValue,CV[B].m5,CV[B].p5,-5,5);
@@ -51,30 +50,30 @@ void calcVolts(){
   CV[Z].Volts = mapd(CV[Z].rawValue,CV[Z].m5,CV[Z].p5,-5,5);
 }
 
-void calcRanges(){ //for now done this stupidly, but I am afraid of pointers hehe
-  CV[R].m5 = 2*CV[R].p0-CV[R].p5;
-  CV[R].m2p5 = CV[R].p0-((CV[R].p5 - CV[R].p0)*0.5);
-  CV[R].p2p5 = CV[R].p5 - ((CV[R].p5 - CV[R].p0)*0.5);
+void calcRanges(){ //need to do this better
+  CV[R].m5    = 2*CV[R].p0 -   CV[R].p5;
+  CV[R].m2p5  =   CV[R].p0 - ((CV[R].p5 - CV[R].p0)*0.5);
+  CV[R].p2p5  =   CV[R].p5 - ((CV[R].p5 - CV[R].p0)*0.5);
 
-  CV[G].m5 = 2*CV[G].p0-CV[G].p5;
-  CV[G].m2p5 = CV[G].p0-((CV[G].p5 - CV[G].p0)*0.5);
-  CV[G].p2p5 = CV[G].p5 - ((CV[G].p5 - CV[G].p0)*0.5);
+  CV[G].m5    = 2*CV[G].p0 -   CV[G].p5;
+  CV[G].m2p5  =   CV[G].p0 - ((CV[G].p5 - CV[G].p0)*0.5);
+  CV[G].p2p5  =   CV[G].p5 - ((CV[G].p5 - CV[G].p0)*0.5);
 
-  CV[B].m5 = 2*CV[B].p0-CV[B].p5;
-  CV[B].m2p5 = CV[B].p0-((CV[B].p5 - CV[B].p0)*0.5);
-  CV[B].p2p5 = CV[B].p5 - ((CV[B].p5 - CV[B].p0)*0.5);
+  CV[B].m5    = 2*CV[B].p0 -   CV[B].p5;
+  CV[B].m2p5  =   CV[B].p0 - ((CV[B].p5 - CV[B].p0)*0.5);
+  CV[B].p2p5  =   CV[B].p5 - ((CV[B].p5 - CV[B].p0)*0.5);
 
-  CV[P].m5 = 2*CV[P].p0-CV[P].p5;
-  CV[P].m2p5 = CV[P].p0-((CV[P].p5 - CV[P].p0)*0.5);
-  CV[P].p2p5 = CV[P].p5 - ((CV[P].p5 - CV[P].p0)*0.5);
+  CV[P].m5    = 2*CV[P].p0 -   CV[P].p5;
+  CV[P].m2p5  =   CV[P].p0 - ((CV[P].p5 - CV[P].p0)*0.5);
+  CV[P].p2p5  =   CV[P].p5 - ((CV[P].p5 - CV[P].p0)*0.5);
 
-  CV[A].m5 = 2*CV[A].p0-CV[A].p5;
-  CV[A].m2p5 = CV[A].p0-((CV[A].p5 - CV[A].p0)*0.5);
-  CV[A].p2p5 = CV[A].p5 - ((CV[A].p5 - CV[A].p0)*0.5);
+  CV[A].m5    = 2*CV[A].p0 -   CV[A].p5;
+  CV[A].m2p5  =   CV[A].p0 - ((CV[A].p5 - CV[A].p0)*0.5);
+  CV[A].p2p5  =   CV[A].p5 - ((CV[A].p5 - CV[A].p0)*0.5);
 
-  CV[Z].m5 = 2*CV[Z].p0-CV[Z].p5;
-  CV[Z].m2p5 = CV[Z].p0-((CV[Z].p5 - CV[Z].p0)*0.5);
-  CV[Z].p2p5 = CV[Z].p5 - ((CV[Z].p5 - CV[Z].p0)*0.5);
+  CV[Z].m5    = 2*CV[Z].p0 -   CV[Z].p5;
+  CV[Z].m2p5  =   CV[Z].p0 - ((CV[Z].p5 - CV[Z].p0)*0.5);
+  CV[Z].p2p5  =   CV[Z].p5 - ((CV[Z].p5 - CV[Z].p0)*0.5);
 }
 
 
@@ -134,7 +133,7 @@ void CVRead(){
 
       break;
   }
-    CVswitch = !CVswitch;
+  CVswitch = !CVswitch;
 }
 void printCV(){
   Serial.print("R:"); Serial.print(CV[R].rawValue); Serial.print(" -> "); Serial.print(CV[R].Value); Serial.print("\t");
