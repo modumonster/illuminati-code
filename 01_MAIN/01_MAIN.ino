@@ -55,5 +55,4 @@ void setup() {
 
 void loop() {
   buttons();
-  //ledTest();
 }

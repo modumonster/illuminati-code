@@ -1,6 +1,3 @@
-// minusLED BLUE does modeLED BLUE
-// LEDs are still fucked
-// still weird blinking
 const double ledPWMfreq = 40000.0; //Hz
 double dutyR = 100.0;
 double dutyG = 100.0;
@@ -39,45 +36,35 @@ double rgbToDuty(uint8_t input){
 
 uint8_t LHandlerState = 0;
 void LEDHandler(){
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true); // this fixes the light overspill somehow
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true); //should be 
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
-  switch(LHandlerState){
-    case 0:
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
+  if(LHandlerState%2 == 0){
+    PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
+    PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
+    PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
+  }
+  else{
+    switch(LHandlerState){
+    case 1:
       digitalWrite(LselectPin,  LOW);
       digitalWrite(LmodePin,    HIGH);
       PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(modeLED.r), false);
       PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(modeLED.g), false);
       PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(modeLED.b), false);
-
       break;
-    case 1:
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
+    case 3:
       digitalWrite(LmodePin,    LOW);
       digitalWrite(LplusPin,    HIGH);
       PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(plusLED.r), true);
       PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(plusLED.g), true);
       PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(plusLED.b), true);
       break;
-    case 2:
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
+    case 5:
       digitalWrite(LplusPin,    LOW);
       digitalWrite(LminusPin,   HIGH);
       PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(minusLED.r), true);
       PWM_ledG->setPWM(LgreenPin, ledPWMfreq, rgbToDuty(minusLED.g), true);
       PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(minusLED.b), true);
       break;
-    case 3:
-      PWM_ledR->setPWM(LredPin,   ledPWMfreq, 100, true);
-      PWM_ledG->setPWM(LgreenPin, ledPWMfreq, 100, true);
-      PWM_ledB->setPWM(LbluePin,  ledPWMfreq, 100, true);
+    case 7:
       digitalWrite(LminusPin,   LOW);
       digitalWrite(LselectPin,  HIGH);
       PWM_ledR->setPWM(LredPin,   ledPWMfreq, rgbToDuty(selectLED.r), true);
@@ -85,10 +72,12 @@ void LEDHandler(){
       PWM_ledB->setPWM(LbluePin,  ledPWMfreq, rgbToDuty(selectLED.b), true);
       break;
     default:
-    break;
+      break;
+    }
   }
+  
   LHandlerState++;
-  if(LHandlerState>3)LHandlerState = 0;
+  if(LHandlerState>7)LHandlerState = 0;
 }
 
 void resetLEDs(){
@@ -125,7 +114,7 @@ void ledTest(){
   delay(500);
   minusLED = GREEN;
   delay(500);
-  modeLED = BLUE;
+  minusLED = BLUE;
   delay(500);
   minusLED = OFF;
   delay(500);
