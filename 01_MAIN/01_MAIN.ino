@@ -8,6 +8,7 @@
 #include "Structure.h"
 
 #define TIMER0_INTERVAL_uS 1000
+#define TIMER1_INTERVAL_uS 500
 
 RPI_PICO_Timer ITimer0(0);
 RPI_PICO_Timer ITimer1(1);
@@ -15,6 +16,10 @@ RPI_PICO_Timer ITimer1(1);
 bool TimerHandler0(struct repeating_timer *t)
 {
   static bool toggle0 = false;
+
+#if (TIMER_INTERRUPT_DEBUG > 0)
+  Serial.print("ITimer0: millis() = "); Serial.println(millis());
+#endif
 
   CVRead();
   CVtoLamp();
@@ -27,6 +32,10 @@ bool TimerHandler1(struct repeating_timer *t)
 {
   static bool toggle1 = false;
 
+#if (TIMER_INTERRUPT_DEBUG > 0)
+  Serial.print("ITimer1: millis() = "); Serial.println(millis());
+#endif
+
   LEDHandler();
   return true;
 }
@@ -34,7 +43,7 @@ bool TimerHandler1(struct repeating_timer *t)
 
 void setup() {
   Serial.begin(115200);
-
+  // init interrupt
   ITimer0.attachInterruptInterval(TIMER0_INTERVAL_uS, TimerHandler0);
   ITimer1.attachInterruptInterval(TIMER1_INTERVAL_uS, TimerHandler1);
   
