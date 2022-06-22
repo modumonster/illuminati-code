@@ -86,6 +86,35 @@ void resetLEDs(){
     minusLED = OFF;
     selectLED = OFF;
 }
+
+void updateLEDs(){
+  switch(menuPage){
+    case GAIN:
+      modeLED = MENUcolor[GAIN];
+      selectLED = CVcolor[GselectedCV];
+      break;
+    case DECAY:
+      modeLED = MENUcolor[DECAY];
+      selectLED = CVcolor[DselectedCV];
+      break;
+    case STEPS:
+      modeLED = MENUcolor[STEPS];
+      break;
+    case JAM:
+      modeLED = MENUcolor[JAM];
+      break;
+    case MIDI:
+      modeLED = MENUcolor[MIDI];
+      break;
+    case STRIPS:
+      modeLED = MENUcolor[STRIPS];
+      break;
+    case CAL:
+      modeLED = MENUcolor[CAL];
+      break;
+  }
+}
+
 void ledTest(){
   modeLED = RED;
   delay(500);
@@ -127,5 +156,4 @@ void ledTest(){
   delay(500);
   selectLED = OFF;
   delay(500);
-  
 }

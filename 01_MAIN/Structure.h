@@ -27,7 +27,7 @@ struct CVstruct{
   
 };
 
-  const uint8_t rfTime[3] = {0,5,10};
+const uint8_t rfTime[3] = {0,5,10}; //selectable rise/fall times [ms]
 
 #define R 0
 #define G 1
@@ -58,6 +58,10 @@ const LEDcolor CYAN     = {0,255,255};
 const LEDcolor MAGENTA  = {255,0,255};
 
 const LEDcolor OFF     = {0,0,0};
+
+const LEDcolor CVcolor[6] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
+const LEDcolor STRIPcolor[3] = {RED,GREEN,BLUE};
+const LEDcolor MENUcolor[7] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF};
 
 LEDcolor modeLED        = YELLOW; //to indicate starting up in JAM mode
 LEDcolor plusLED        = {0,0,0};
