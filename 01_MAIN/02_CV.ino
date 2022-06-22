@@ -163,74 +163,66 @@ void calibrateCV(){
 
 void nextMin(CVstruct &data)
 {
-    if(data.rangeMin == data.m5){
-      data.rangeMin = data.m2p5;
-      plusLED = RED;
-    }
-    else if (data.rangeMin == data.m2p5){
-      data.rangeMin = data.p0;
-      plusLED = GREEN;
-    }
-    else if (data.rangeMin == data.p0){
-      data.rangeMin = data.m5;
-      plusLED = BLUE;
-    }
-    
-    Serial.print("min range is now "); Serial.println(data.rangeMin);
+  if(data.rangeMin == data.m5){
+    data.rangeMin = data.m2p5;
+    plusLED = RED;
+  }
+  else if (data.rangeMin == data.m2p5){
+    data.rangeMin = data.p0;
+    plusLED = GREEN;
+  }
+  else if (data.rangeMin == data.p0){
+    data.rangeMin = data.m5;
+    plusLED = BLUE;
+  }
 }
 
 
 void nextMax(CVstruct &data)
 {
-    if(data.rangeMax == data.p0){
-      data.rangeMax = data.p2p5;
-      minusLED = RED;
-    }
-    else if (data.rangeMax == data.p2p5){
-      data.rangeMax = data.p5;
-      minusLED = GREEN;
-    }
-    else if (data.rangeMax == data.p5) {
-      data.rangeMax = data.p0;
-      //minusLED = BLUE; - this somehow breaks something with LEDs, will turn off for now
-    }
-
-    Serial.print("max range is now "); Serial.println(data.rangeMax);
+  if(data.rangeMax == data.p0){
+    data.rangeMax = data.p2p5;
+    minusLED = RED;
+  }
+  else if (data.rangeMax == data.p2p5){
+    data.rangeMax = data.p5;
+    minusLED = GREEN;
+  }
+  else if (data.rangeMax == data.p5) {
+    data.rangeMax = data.p0;
+    minusLED = BLUE;
+  }
 }
 
 
-void nextRising(CVstruct &data) //i know this looks stupid, but I dont want to have more uints that are not really needed
+void nextRise(CVstruct &data) //i know this looks stupid, but I dont want to have more uints that are not really needed
 {
-    if(data.riseTime == rfTime[0]){
-      data.riseTime = rfTime[1];
-      plusLED = RED;
-    }
-    else if (data.riseTime == rfTime[1]){
-      data.riseTime = rfTime[2];
-      plusLED = GREEN;
-    }
-    else if (data.riseTime == rfTime[2]) {
-      data.riseTime = rfTime[0];
-      plusLED = BLUE;
-    }
-
-    Serial.print("rise time is now"); Serial.print(data.riseTime); Serial.println(" ms");
+  if(data.riseTime == rfTime[0]){
+    data.riseTime = rfTime[1];
+    plusLED = RED;
+  }
+  else if (data.riseTime == rfTime[1]){
+    data.riseTime = rfTime[2];
+    plusLED = GREEN;
+  }
+  else if (data.riseTime == rfTime[2]) {
+    data.riseTime = rfTime[0];
+    plusLED = BLUE;
+  }
 }
 
-void nextFalling(CVstruct &data)
+void nextFall(CVstruct &data)
 {
-    if(data.fallTime == rfTime[0]){
-      data.fallTime = rfTime[1];
-      minusLED = GREEN;
-    }
-    else if (data.fallTime == rfTime[1]){
-      data.fallTime = rfTime[2];
-      //minusLED = BLUE; - breaks
-    }
-    else if (data.fallTime == rfTime[2]) {
-      data.fallTime = rfTime[0];
-      minusLED = RED;
-    }
-
-    Serial.print("fall time is now"); Serial.print(data.fallTime); Serial.println(" ms");
+  if(data.fallTime == rfTime[0]){
+    data.fallTime = rfTime[1];
+    minusLED = GREEN;
+  }
+  else if (data.fallTime == rfTime[1]){
+    data.fallTime = rfTime[2];
+    minusLED = BLUE;
+  }
+  else if (data.fallTime == rfTime[2]) {
+    data.fallTime = rfTime[0];
+    minusLED = RED;
+  }
 }
