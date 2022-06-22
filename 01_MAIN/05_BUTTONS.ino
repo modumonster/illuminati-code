@@ -210,9 +210,13 @@ void clickHandler(Button2& btn){
 }
 void lpHandler(Button2& btn){
   uint16_t time = btn.wasPressedFor();
-    if(btn.getID() == MODE || btn.getID() == PLUS) modeAndPlus--;
+    if(btn.getID() == MODE || btn.getID() == PLUS){
+      modeAndPlus--;
+    }
 
-    if(btn.getID() == MINUS || btn.getID() == SELECT) minusAndSelect--;
+    if(btn.getID() == MINUS || btn.getID() == SELECT){
+      minusAndSelect--;
+    }
 }
 
 void lpDetectedHandler(Button2& btn){
