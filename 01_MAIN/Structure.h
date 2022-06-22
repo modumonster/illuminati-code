@@ -68,6 +68,8 @@ const LEDcolor MENUcolor[7] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF};
 const LEDcolor RFcolor[3] = {RED,GREEN,BLUE}; // 0ms, 5ms, 10ms
 const LEDcolor GAINMINcolor[3] = {RED,GREEN,BLUE};
 const LEDcolor GAINMAXcolor[3] = {RED,GREEN,BLUE};
+const LEDcolor REACTcolor[4] = {RED,GREEN,BLUE,YELLOW};
+
 LEDcolor modeLED        = {0,0,0};
 LEDcolor plusLED        = {0,0,0};
 LEDcolor minusLED       = {0,0,0};

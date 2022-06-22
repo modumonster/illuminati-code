@@ -104,6 +104,14 @@ void updateLEDs(){
       break;
     case STEPS:
       modeLED = MENUcolor[STEPS];
+      plusLED = MENUcolor[STEPS]; //for now just same as STEPS
+      if(AselectedStrip == STRIP_BOTH || AselectedStrip == STRIP_A){
+        minusLED = REACTcolor[strip_A.reaction];
+      }
+      else{
+        minusLED = REACTcolor[strip_Z.reaction];
+      }
+      selectLED = STRIPcolor[AselectedStrip];
       break;
     case JAM:
       modeLED = MENUcolor[JAM];
