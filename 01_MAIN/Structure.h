@@ -59,7 +59,7 @@ const LEDcolor MAGENTA  = {255,0,255};
 
 const LEDcolor OFF     = {0,0,0};
 
-LEDcolor modeLED        = {0,0,0};
+LEDcolor modeLED        = YELLOW; //to indicate starting up in JAM mode
 LEDcolor plusLED        = {0,0,0};
 LEDcolor minusLED       = {0,0,0};
 LEDcolor selectLED      = {0,0,0};

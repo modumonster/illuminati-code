@@ -1,9 +1,3 @@
-
-/*
- * ### LEDs
-*/
-
-
 // minusLED BLUE does modeLED BLUE
 // LEDs are still fucked
 // still weird blinking
@@ -37,7 +31,6 @@ void ledsInit(){
   digitalWrite(LminusPin, LOW);
   digitalWrite(LselectPin,LOW);
 
-  updatePage();
 }
 
 double rgbToDuty(uint8_t input){

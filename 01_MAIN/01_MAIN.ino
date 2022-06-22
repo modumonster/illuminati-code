@@ -22,7 +22,7 @@ bool TimerHandler0(struct repeating_timer *t)
   CVRead();
   CVtoLamp();
   CVtoStrip();
- // printCV();
+  // printCV();
   return true;
 }
 
@@ -40,21 +40,20 @@ bool TimerHandler1(struct repeating_timer *t)
 }
 
 
-void setup(){
+void setup() {
   Serial.begin(115200);
-    // init interrupt
+  // init interrupt
   ITimer0.attachInterruptInterval(TIMER0_INTERVAL_uS, TimerHandler0);
   ITimer1.attachInterruptInterval(TIMER1_INTERVAL_uS, TimerHandler1);
-    
+  
   ledsInit();
   lampInit();
   stripsInit();
   CVInit();
   buttonInit();
-
 }
 
-void loop(){
+void loop() {
   buttons();
   //ledTest();
 }
