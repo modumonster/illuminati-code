@@ -7,9 +7,6 @@ struct CVstruct{
   uint16_t rawLastValue;
 
   //GAIN Min/Max
-  double   rangeMin; //should be later deleted and only p0,p5 etc. and indexes will be used
-  double   rangeMax;
-
   uint8_t minIndex = 0; // 0->m5, 1->m2p5, 2->p0
   uint8_t maxIndex = 0; // 0->p5, 1->p2p5, 2->p0
   

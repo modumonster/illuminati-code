@@ -33,23 +33,6 @@ void CVInit(){
 
   calcRanges();
   
-  CV[R].rangeMin = CV[R].p0;
-  CV[R].rangeMax = CV[R].p5;
-
-  CV[G].rangeMin = CV[G].m5;
-  CV[G].rangeMax = CV[G].p5;
-
-  CV[B].rangeMin = CV[B].m5;
-  CV[B].rangeMax = CV[B].p5;
-
-  CV[P].rangeMin = CV[P].m5;
-  CV[P].rangeMax = CV[P].p5;
-
-  CV[A].rangeMin = CV[A].p0;
-  CV[A].rangeMax = CV[A].p5;
-
-  CV[Z].rangeMin = CV[Z].p0;
-  CV[Z].rangeMax = CV[Z].p5;
   printRanges();
 }
 
@@ -94,6 +77,35 @@ void calcRanges(){ //for now done this stupidly, but I am afraid of pointers heh
   CV[Z].p2p5 = CV[Z].p5 - ((CV[Z].p5 - CV[Z].p0)*0.5);
 }
 
+
+uint16_t rangeMin(CVstruct &data){
+  uint16_t minimum;
+  if(data.minIndex == 0){
+    minimum = data.m5;
+  }
+  else if(data.minIndex == 1){
+    minimum = data.m2p5;
+  }
+  else if(data.minIndex == 2){
+    minimum = data.p0;
+  }
+  return minimum;
+}
+
+uint16_t rangeMax(CVstruct &data){
+  uint16_t maximum;
+  if(data.maxIndex == 0){
+    maximum = data.p5;
+  }
+  else if(data.maxIndex == 1){
+    maximum = data.p2p5;
+  }
+  else if(data.maxIndex == 2){
+    maximum = data.p0;
+  }
+  return maximum;
+}
+
 void CVRead(){
   switch(CVswitch){
     case readRBA:
@@ -103,9 +115,9 @@ void CVRead(){
       digitalWrite(azControlPin, HIGH);
       digitalWrite(rgControlPin, HIGH);
       digitalWrite(bpControlPin, HIGH);
-      CV[R].Value = mapd(CV[R].rawValue,CV[R].rangeMin,CV[R].rangeMax,0,255);
-      CV[B].Value = mapd(CV[B].rawValue,CV[B].rangeMin,CV[B].rangeMax,0,255);
-      CV[A].Value = mapd(CV[A].rawValue,CV[A].rangeMin,CV[A].rangeMax,0,255);
+      CV[R].Value = mapd(CV[R].rawValue,rangeMin(CV[R]),rangeMax(CV[R]),0,255);
+      CV[B].Value = mapd(CV[B].rawValue,rangeMin(CV[B]),rangeMax(CV[B]),0,255);
+      CV[A].Value = mapd(CV[A].rawValue,rangeMin(CV[A]),rangeMax(CV[A]),0,255);
 
       break;
 
@@ -116,9 +128,9 @@ void CVRead(){
       digitalWrite(azControlPin, LOW);
       digitalWrite(rgControlPin, LOW);
       digitalWrite(bpControlPin, LOW);
-      CV[G].Value = mapd(CV[G].rawValue,CV[G].rangeMin,CV[G].rangeMax,0,255);
-      CV[P].Value = mapd(CV[P].rawValue,CV[P].rangeMin,CV[P].rangeMax,0,255);
-      CV[Z].Value = mapd(CV[Z].rawValue,CV[Z].rangeMin,CV[Z].rangeMax,0,255);
+      CV[G].Value = mapd(CV[G].rawValue,rangeMin(CV[G]),rangeMax(CV[G]),0,255);
+      CV[P].Value = mapd(CV[P].rawValue,rangeMin(CV[P]),rangeMax(CV[P]),0,255);
+      CV[Z].Value = mapd(CV[Z].rawValue,rangeMin(CV[Z]),rangeMax(CV[Z]),0,255);
 
       break;
   }
@@ -159,34 +171,4 @@ void calibrateCV(){
   //bla bla bla, vyhodim data
 
   calcRanges();
-}
-
-void nextMin(CVstruct &data)
-{
-  if(data.rangeMin == data.m5){
-    data.rangeMin = data.m2p5;
-  }
-  else if (data.rangeMin == data.m2p5){
-    data.rangeMin = data.p0;
-  }
-  else if (data.rangeMin == data.p0){
-    data.rangeMin = data.m5;
-  }
-}
-
-
-void nextMax(CVstruct &data)
-{
-  if(data.rangeMax == data.p0){
-    data.rangeMax = data.p2p5;
-    minusLED = RED;
-  }
-  else if (data.rangeMax == data.p2p5){
-    data.rangeMax = data.p5;
-    minusLED = GREEN;
-  }
-  else if (data.rangeMax == data.p5) {
-    data.rangeMax = data.p0;
-    minusLED = BLUE;
-  }
 }
