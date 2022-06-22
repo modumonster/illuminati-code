@@ -63,7 +63,7 @@ const LEDcolor CVcolor[6] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
 const LEDcolor STRIPcolor[3] = {RED,GREEN,BLUE};
 const LEDcolor MENUcolor[7] = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF};
 
-LEDcolor modeLED        = YELLOW; //to indicate starting up in JAM mode
+LEDcolor modeLED        = {0,0,0};
 LEDcolor plusLED        = {0,0,0};
 LEDcolor minusLED       = {0,0,0};
 LEDcolor selectLED      = {0,0,0};

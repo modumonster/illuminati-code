@@ -28,6 +28,7 @@ void ledsInit(){
   digitalWrite(LminusPin, LOW);
   digitalWrite(LselectPin,LOW);
 
+  updateLEDs();
 }
 
 double rgbToDuty(uint8_t input){
@@ -102,6 +103,9 @@ void updateLEDs(){
       break;
     case JAM:
       modeLED = MENUcolor[JAM];
+      plusLED = YELLOW;
+      minusLED = YELLOW;
+      selectLED = YELLOW;
       break;
     case MIDI:
       modeLED = MENUcolor[MIDI];
