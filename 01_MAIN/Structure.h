@@ -81,6 +81,11 @@ struct strip{
 strip strip_A;
 strip strip_Z;
 
+
+
+uint8_t lampALinear = 1;
+uint8_t lampZLinear = 1;
+
 //MENU
 
 #define GAIN 0

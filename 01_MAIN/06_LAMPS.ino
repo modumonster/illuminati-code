@@ -1,4 +1,4 @@
-const double lampPWMfreq = 9000.0; //Hz
+const double lampPWMfreq = 100000.0; //Hz
 
 RP2040_PWM* PWM_lampA;
 RP2040_PWM* PWM_lampZ;
@@ -30,22 +30,33 @@ void printPWMInfo(RP2040_PWM* PWM_Instance)
 
 double lastA = 0;
 double lastZ = 0;
+double valA;
+double valZ;
 
 void CVtoLamp(){
-  double valA = mapd(CV[A].Value,0,255,0,100);
+  double valA;
+  if(lampALinear){
+    valA = cie(CV[A].Value);
+  }
+  else{
+    valA = mapd(CV[A].Value,0,255,0,100);
+  }
   if(lastA != valA){
   PWM_lampA->setPWM(lampAPin, lampPWMfreq, valA, true);
     lastA = valA;
     //printPWMInfo(PWM_lampA);
   }
-  
-  double valZ = mapd(CV[Z].Value,0,255,0,100);
+  if(lampZLinear){
+    valZ = cie(CV[Z].Value);
+  }
+  else{
+    valZ = mapd(CV[Z].Value,0,255,0,100);
+  }
   if(lastZ != valZ){
     PWM_lampZ->setPWM(lampZPin, lampPWMfreq, valZ, true);
     lastZ = valZ;
   }
 }
-
 
 double dutyA = 50.0;
 double dutyZ = 50.0;

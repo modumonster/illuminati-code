@@ -25,12 +25,3 @@ const uint8_t lampZPin      = 11;
 
 const uint8_t stripAPin     = 2;
 const uint8_t stripZPin     = 3;
-
-
-double mapd(double x, double in_min, double in_max, double out_min, double out_max)
-{
-    double out = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    if(out > out_max) out = out_max;
-    if(out < out_min) out = out_min;
-    return out;
-}

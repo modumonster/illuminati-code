@@ -57,6 +57,12 @@ void clickHandler(Button2& btn){
         case GAIN:
             if(btnId == MODE){
               Serial.println("GAIN\t| Mode pressed");
+              if(GselectedCV == A){
+                lampALinear = !lampALinear;
+              }
+              else if(GselectedCV == Z){
+                lampZLinear = !lampZLinear;
+              }
             }
             else if(btnId == PLUS){     //-5/-2.5/-0 minimum voltage
               CV[GselectedCV].minIndex++;
