@@ -52,7 +52,7 @@ const LEDcolor OFF      = {0,0,0};
 
 const LEDcolor CVcolor[6]       = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
 const LEDcolor STRIPcolor[3]    = {RED,GREEN,BLUE};
-const LEDcolor MENUcolor[7]     = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF};
+const LEDcolor MENUcolor[8]     = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF,OFF};
 const LEDcolor RFcolor[3]       = {RED,GREEN,BLUE}; // 0ms, 5ms, 10ms
 const LEDcolor GAINMINcolor[3]  = {RED,GREEN,BLUE};
 const LEDcolor GAINMAXcolor[3]  = {RED,GREEN,BLUE};
@@ -88,13 +88,14 @@ uint8_t lampZLinear = 1;
 
 //MENU
 
-#define GAIN 0
-#define DECAY 1
-#define STEPS 2
-#define JAM 3
-#define MIDI 4
-#define STRIPS 5
-#define CAL 6
+#define GAIN    0
+#define DECAY   1
+#define STEPS   2
+#define JAM     3
+#define MIDI    4
+#define STRIPS  5
+#define CAL     6
+#define SETUP   7
 
 uint8_t menuPage = JAM;
 

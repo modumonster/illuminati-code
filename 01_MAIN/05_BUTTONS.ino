@@ -53,8 +53,10 @@ void buttons(){
   btnSelect.loop();
 }
 
-uint8_t modeAndPlus = 0;
-uint8_t minusAndSelect = 0;
+uint8_t modeAndPlus     = 0;
+uint8_t minusAndSelect  = 0;
+uint8_t plusAndMinus    = 0;
+uint8_t modeAndSelect   = 0;
 
 void clickHandler(Button2& btn){
   if (btn.getType() == single_click) {        
@@ -219,6 +221,20 @@ void clickHandler(Button2& btn){
               Serial.println("CAL \t| Select pressed");
             }
           break;
+        case SETUP:
+            if(btnId == MODE){
+              Serial.println("SETUP \t| Mode pressed");
+            }
+            else if(btnId == PLUS){
+              Serial.println("SETUP \t| Plus pressed");
+            }
+            else if(btnId == MINUS){
+              Serial.println("SETUP \t| Minus pressed");
+            }
+            else if(btnId == SELECT){
+              Serial.println("SETUP \t| Select pressed");
+            }
+          break;
       }     
   }
   updateLEDs();
@@ -233,31 +249,43 @@ void lpHandler(Button2& btn){
     if(btn.getID() == MINUS || btn.getID() == SELECT){
       minusAndSelect--;
     }
+
+    if(btn.getID() == MINUS || btn.getID() == PLUS){
+      plusAndMinus--;
+    }
+
+    if(btn.getID() == MODE || btn.getID() == SELECT){
+      modeAndSelect--;
+    }
 }
 
 void lpDetectedHandler(Button2& btn){
   switch(btn.getID()){
     case MODE:
       modeAndPlus++;
-      if(modeAndPlus < 2){
+      modeAndSelect++;
+      if(modeAndPlus < 2 && modeAndSelect < 2){
         menuPage = DECAY;
       }
       break;
     case PLUS:
       modeAndPlus++;
-      if(modeAndPlus < 2){
+      plusAndMinus++;
+      if(modeAndPlus < 2 && plusAndMinus < 2){
         menuPage = GAIN;
       }
       break;
     case MINUS:
       minusAndSelect++;
-      if(minusAndSelect < 2){
+      plusAndMinus++;
+      if(minusAndSelect < 2 && plusAndMinus < 2){
         menuPage = STEPS;
       }
       break;
     case SELECT:
       minusAndSelect++;
-      if(minusAndSelect < 2){
+      modeAndSelect++;
+      if(minusAndSelect < 2 && modeAndSelect < 2){
         menuPage = JAM;
       }
       break;
@@ -269,6 +297,12 @@ void lpDetectedHandler(Button2& btn){
   }
   if(minusAndSelect >= 2){
     menuPage = STRIPS;
+  }
+  if(modeAndSelect >= 2){
+    menuPage = SETUP;
+  }
+  if(plusAndMinus >= 2){
+    menuPage = CAL;
   }
   Serial.print("Now you are in menu ");Serial.println(menuPage);
   updateLEDs();

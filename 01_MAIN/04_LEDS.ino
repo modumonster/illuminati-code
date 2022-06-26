@@ -139,6 +139,12 @@ void updateLEDs(){
       minusLED  = MENUcolor[CAL];
       selectLED = MENUcolor[CAL];
       break;
+    case SETUP:
+      modeLED   = MENUcolor[SETUP];
+      plusLED   = MENUcolor[SETUP];
+      minusLED  = MENUcolor[SETUP];
+      selectLED = MENUcolor[SETUP];
+      break;
   }
 }
 
