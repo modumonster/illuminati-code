@@ -1,5 +1,6 @@
-const uint16_t debounceMillis = 5;
+const uint16_t debounceMillis = 20;
 const uint16_t longPressMillis = 500;
+const uint16_t doubleClickMillis = 0; //disable double click
 
 Button2 btnMode, btnPlus, btnMinus, btnSelect;
 
@@ -28,6 +29,11 @@ void buttonInit(){
   btnPlus.setDebounceTime(debounceMillis);
   btnMinus.setDebounceTime(debounceMillis);
   btnSelect.setDebounceTime(debounceMillis);
+
+  btnMode.setDoubleClickTime(doubleClickMillis);
+  btnPlus.setDoubleClickTime(doubleClickMillis);
+  btnMinus.setDoubleClickTime(doubleClickMillis);
+  btnSelect.setDoubleClickTime(doubleClickMillis);
 
   btnMode.setLongClickTime(longPressMillis);
   btnPlus.setLongClickTime(longPressMillis);
