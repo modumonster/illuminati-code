@@ -1,15 +1,15 @@
 void CVInit(){
   analogReadResolution(12);
-  pinMode(rgCVPin, INPUT);
-  pinMode(bpCVPin, INPUT);
-  pinMode(azCVPin, INPUT);
-  pinMode(rgControlPin, OUTPUT);
-  pinMode(bpControlPin, OUTPUT);
-  pinMode(azControlPin, OUTPUT);
+  pinMode(RG_IN_PIN, INPUT);
+  pinMode(BP_IN_PIN, INPUT);
+  pinMode(AZ_IN_PIN, INPUT);
+  pinMode(RG_CTRL_PIN, OUTPUT);
+  pinMode(BP_CTRL_PIN, OUTPUT);
+  pinMode(AZ_CTRL_PIN, OUTPUT);
 
-  digitalWrite(azControlPin, LOW);
-  digitalWrite(rgControlPin, LOW);
-  digitalWrite(bpControlPin, LOW);
+  digitalWrite(AZ_CTRL_PIN, LOW);
+  digitalWrite(RG_CTRL_PIN, LOW);
+  digitalWrite(BP_CTRL_PIN, LOW);
 
  //for now, just measured data for calibration:
   CV[R].p0 = 1890;
@@ -106,21 +106,21 @@ uint16_t rangeMax(CVstruct &data){
 void CVRead(){
   switch(CVswitch){
     case readRBA:
-      CV[R].rawValue = analogRead(rgCVPin);
-      CV[B].rawValue = analogRead(bpCVPin);
-      CV[A].rawValue = analogRead(azCVPin);
-      digitalWrite(azControlPin, HIGH);
-      digitalWrite(rgControlPin, HIGH);
-      digitalWrite(bpControlPin, HIGH);
+      CV[R].rawValue = analogRead(RG_IN_PIN);
+      CV[B].rawValue = analogRead(BP_IN_PIN);
+      CV[A].rawValue = analogRead(AZ_IN_PIN);
+      digitalWrite(AZ_CTRL_PIN, HIGH);
+      digitalWrite(RG_CTRL_PIN, HIGH);
+      digitalWrite(BP_CTRL_PIN, HIGH);
       break;
 
     case readGPZ:  
-      CV[G].rawValue = analogRead(rgCVPin);
-      CV[P].rawValue = analogRead(bpCVPin);
-      CV[Z].rawValue = analogRead(azCVPin);
-      digitalWrite(azControlPin, LOW);
-      digitalWrite(rgControlPin, LOW);
-      digitalWrite(bpControlPin, LOW);
+      CV[G].rawValue = analogRead(RG_IN_PIN);
+      CV[P].rawValue = analogRead(BP_IN_PIN);
+      CV[Z].rawValue = analogRead(AZ_IN_PIN);
+      digitalWrite(AZ_CTRL_PIN, LOW);
+      digitalWrite(RG_CTRL_PIN, LOW);
+      digitalWrite(BP_CTRL_PIN, LOW);
       break;
   }
   CVswitch = !CVswitch;

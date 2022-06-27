@@ -1,5 +1,5 @@
-Adafruit_NeoPixel stripA(strip_A.pixels, stripAPin, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel stripZ(strip_Z.pixels, stripZPin, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripA(strip_A.pixels, X_STRIP_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripZ(strip_Z.pixels, Y_STRIP_PIN, NEO_GRB + NEO_KHZ800);
 
 void stripsInit(){
   stripA.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)

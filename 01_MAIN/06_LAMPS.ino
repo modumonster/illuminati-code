@@ -4,8 +4,8 @@ RP2040_PWM* PWM_lampA;
 RP2040_PWM* PWM_lampZ;
 
 void lampInit(){
-  PWM_lampA = new RP2040_PWM(lampAPin, lampPWMfreq, 100.0);
-  PWM_lampZ = new RP2040_PWM(lampZPin, lampPWMfreq, 100.0);
+  PWM_lampA = new RP2040_PWM(A_LAMP_PIN, lampPWMfreq, 100.0);
+  PWM_lampZ = new RP2040_PWM(Z_LAMP_PIN, lampPWMfreq, 100.0);
 
   if (PWM_lampA)
   {
@@ -42,7 +42,7 @@ void CVtoLamp(){
     valA = mapd(toValue(A),0,255,0,100);
   }
   if(lastA != valA){
-  PWM_lampA->setPWM(lampAPin, lampPWMfreq, valA, true);
+  PWM_lampA->setPWM(A_LAMP_PIN, lampPWMfreq, valA, true);
     lastA = valA;
     //printPWMInfo(PWM_lampA);
   }
@@ -53,7 +53,7 @@ void CVtoLamp(){
     valZ = mapd(toValue(Z),0,255,0,100);
   }
   if(lastZ != valZ){
-    PWM_lampZ->setPWM(lampZPin, lampPWMfreq, valZ, true);
+    PWM_lampZ->setPWM(Z_LAMP_PIN, lampPWMfreq, valZ, true);
     lastZ = valZ;
   }
 }
@@ -63,9 +63,9 @@ double dutyZ = 50.0;
 
 void testLamp(){
   for(dutyA = 0.0; dutyA <= 100.0; dutyA = dutyA+0.1){
-    PWM_lampA->setPWM(lampAPin, lampPWMfreq, dutyA, true);
+    PWM_lampA->setPWM(A_LAMP_PIN, lampPWMfreq, dutyA, true);
     dutyZ = dutyA;
-    PWM_lampZ->setPWM(lampZPin, lampPWMfreq, dutyZ, true);
+    PWM_lampZ->setPWM(Z_LAMP_PIN, lampPWMfreq, dutyZ, true);
     delay(10);
   }
 }

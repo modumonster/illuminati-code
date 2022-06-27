@@ -5,10 +5,10 @@ const uint16_t doubleClickMillis = 0; //disable double click
 Button2 btnMode, btnPlus, btnMinus, btnSelect;
 
 void buttonInit(){
-  btnMode.begin(BmodePin);
-  btnPlus.begin(BplusPin);
-  btnMinus.begin(BminusPin);
-  btnSelect.begin(BselectPin);
+  btnMode.begin(MODE_BTN_PIN);
+  btnPlus.begin(PLUS_BTN_PIN);
+  btnMinus.begin(MNUS_BTN_PIN);
+  btnSelect.begin(SLCT_BTN_PIN);
   
   btnMode.setClickHandler(clickHandler);
   btnPlus.setClickHandler(clickHandler);
