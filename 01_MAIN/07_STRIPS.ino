@@ -22,9 +22,9 @@ uint8_t Sintensity = 255;
 
 void CVtoStrip() {
   stripA.clear();
-  uint8_t red   = map(CV[R].Value,0,255,0,Sintensity);
-  uint8_t green = map(CV[G].Value,0,255,0,Sintensity);
-  uint8_t blue  = map(CV[B].Value,0,255,0,Sintensity);
+  uint8_t red   = map(toValue(R),0,255,0,Sintensity);
+  uint8_t green = map(toValue(G),0,255,0,Sintensity);
+  uint8_t blue  = map(toValue(B),0,255,0,Sintensity);
   //Serial.print(red);Serial.print(" - ");Serial.print(green);Serial.print(" - ");Serial.println(blue);
   for(uint8_t i = 0; i<strip_A.pixels; i++){
     stripA.setPixelColor(i, stripA.Color(red,green,blue));

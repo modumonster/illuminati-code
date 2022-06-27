@@ -36,10 +36,10 @@ double valZ;
 void CVtoLamp(){
   double valA;
   if(lampALinear){
-    valA = cie(CV[A].Value);
+    valA = cie(toValue(A));
   }
   else{
-    valA = mapd(CV[A].Value,0,255,0,100);
+    valA = mapd(toValue(A),0,255,0,100);
   }
   if(lastA != valA){
   PWM_lampA->setPWM(lampAPin, lampPWMfreq, valA, true);
@@ -47,10 +47,10 @@ void CVtoLamp(){
     //printPWMInfo(PWM_lampA);
   }
   if(lampZLinear){
-    valZ = cie(CV[Z].Value);
+    valZ = cie(toValue(Z));
   }
   else{
-    valZ = mapd(CV[Z].Value,0,255,0,100);
+    valZ = mapd(toValue(Z),0,255,0,100);
   }
   if(lastZ != valZ){
     PWM_lampZ->setPWM(lampZPin, lampPWMfreq, valZ, true);

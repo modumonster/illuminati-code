@@ -9,10 +9,7 @@ struct CVstruct{
   //DECAY times
   uint8_t riseTime = 0; // 0->0ms, 1->5ms, 2->10ms
   uint8_t fallTime = 0; // 0->0ms, 1->5ms, 2->10ms
-  
-  double   Volts;
-  double   Value;       //transformed from input using range to 0-255
-  
+    
   uint16_t p0;          //gathered from calibration
   uint16_t p5;          //gathered from calibration
 

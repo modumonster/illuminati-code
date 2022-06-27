@@ -40,14 +40,12 @@ const bool readRBA = 0;
 const bool readGPZ = 1;
 
 bool CVswitch = readRBA;
+double toValue(uint8_t index){
+  return mapd(CV[index].rawValue,rangeMin(CV[index]),rangeMax(CV[index]),0,255);
+}
 
-void calcVolts(){ //need to do this better
-  CV[R].Volts = mapd(CV[R].rawValue,CV[R].m5,CV[R].p5,-5,5);
-  CV[G].Volts = mapd(CV[G].rawValue,CV[G].m5,CV[G].p5,-5,5);
-  CV[B].Volts = mapd(CV[B].rawValue,CV[B].m5,CV[B].p5,-5,5);
-  CV[P].Volts = mapd(CV[P].rawValue,CV[P].m5,CV[P].p5,-5,5);
-  CV[A].Volts = mapd(CV[A].rawValue,CV[A].m5,CV[A].p5,-5,5);
-  CV[Z].Volts = mapd(CV[Z].rawValue,CV[Z].m5,CV[Z].p5,-5,5);
+double toVolts(uint8_t index){
+  return mapd(CV[index].rawValue,CV[index].m5,CV[index].p5,-5,5);
 }
 
 void calcRanges(){ //need to do this better
@@ -114,10 +112,6 @@ void CVRead(){
       digitalWrite(azControlPin, HIGH);
       digitalWrite(rgControlPin, HIGH);
       digitalWrite(bpControlPin, HIGH);
-      CV[R].Value = mapd(CV[R].rawValue,rangeMin(CV[R]),rangeMax(CV[R]),0,255);
-      CV[B].Value = mapd(CV[B].rawValue,rangeMin(CV[B]),rangeMax(CV[B]),0,255);
-      CV[A].Value = mapd(CV[A].rawValue,rangeMin(CV[A]),rangeMax(CV[A]),0,255);
-
       break;
 
     case readGPZ:  
@@ -127,21 +121,17 @@ void CVRead(){
       digitalWrite(azControlPin, LOW);
       digitalWrite(rgControlPin, LOW);
       digitalWrite(bpControlPin, LOW);
-      CV[G].Value = mapd(CV[G].rawValue,rangeMin(CV[G]),rangeMax(CV[G]),0,255);
-      CV[P].Value = mapd(CV[P].rawValue,rangeMin(CV[P]),rangeMax(CV[P]),0,255);
-      CV[Z].Value = mapd(CV[Z].rawValue,rangeMin(CV[Z]),rangeMax(CV[Z]),0,255);
-
       break;
   }
   CVswitch = !CVswitch;
 }
 void printCV(){
-  Serial.print("R:"); Serial.print(CV[R].rawValue); Serial.print(" -> "); Serial.print(CV[R].Value); Serial.print("\t");
-  Serial.print("G:"); Serial.print(CV[G].rawValue); Serial.print(" -> "); Serial.print(CV[G].Value); Serial.print("\t");
-  Serial.print("B:"); Serial.print(CV[B].rawValue); Serial.print(" -> "); Serial.print(CV[B].Value); Serial.print("\t");
-  Serial.print("P:"); Serial.print(CV[P].rawValue); Serial.print(" -> "); Serial.print(CV[P].Value); Serial.print("\t");
-  Serial.print("A:"); Serial.print(CV[A].rawValue); Serial.print(" -> "); Serial.print(CV[A].Value); Serial.print("\t");
-  Serial.print("Z:"); Serial.print(CV[Z].rawValue); Serial.print(" -> "); Serial.print(CV[Z].Value); Serial.println("\t");
+  Serial.print("R:"); Serial.print(CV[R].rawValue); Serial.print(" -> "); Serial.print(toValue(R)); Serial.print("\t");
+  Serial.print("G:"); Serial.print(CV[G].rawValue); Serial.print(" -> "); Serial.print(toValue(G)); Serial.print("\t");
+  Serial.print("B:"); Serial.print(CV[B].rawValue); Serial.print(" -> "); Serial.print(toValue(B)); Serial.print("\t");
+  Serial.print("P:"); Serial.print(CV[P].rawValue); Serial.print(" -> "); Serial.print(toValue(P)); Serial.print("\t");
+  Serial.print("A:"); Serial.print(CV[A].rawValue); Serial.print(" -> "); Serial.print(toValue(A)); Serial.print("\t");
+  Serial.print("Z:"); Serial.print(CV[Z].rawValue); Serial.print(" -> "); Serial.print(toValue(Z)); Serial.println("\t");
 }
 
 String x=" : "; //spacer
@@ -156,13 +146,12 @@ void printRanges(){
 }
 
 void printVolts(){
-  calcVolts();
-  Serial.print("R:"); Serial.print(CV[R].Volts); Serial.print(" V");
-  Serial.print("G:"); Serial.print(CV[G].Volts); Serial.print(" V");
-  Serial.print("B:"); Serial.print(CV[B].Volts); Serial.print(" V");
-  Serial.print("P:"); Serial.print(CV[P].Volts); Serial.print(" V");
-  Serial.print("A:"); Serial.print(CV[A].Volts); Serial.print(" V");
-  Serial.print("Z:"); Serial.print(CV[Z].Volts); Serial.print(" V");
+  Serial.print("R:"); Serial.print(toVolts(R)); Serial.print("V ");
+  Serial.print("G:"); Serial.print(toVolts(G)); Serial.print("V ");
+  Serial.print("B:"); Serial.print(toVolts(B)); Serial.print("V ");
+  Serial.print("P:"); Serial.print(toVolts(P)); Serial.print("V ");
+  Serial.print("A:"); Serial.print(toVolts(A)); Serial.print("V ");
+  Serial.print("Z:"); Serial.print(toVolts(Z)); Serial.println("V ");
 
 }
 void calibrateCV(){
