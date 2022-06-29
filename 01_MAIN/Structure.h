@@ -60,6 +60,10 @@ LEDcolor plusLED        = {0,0,0};
 LEDcolor minusLED       = {0,0,0};
 LEDcolor selectLED      = {0,0,0};
 
+bool blinkModeLED    = false;
+bool blinkPlusLED    = false;
+bool blinkMinusLED   = false;
+bool blinkSelectLED  = true;
 //STRIPS
 
 #define TRIG_RANDOM 0 //reaction to program signal
@@ -78,11 +82,6 @@ struct strip{
 strip strip_A;
 strip strip_Z;
 
-
-
-uint8_t lampALinear = 1;
-uint8_t lampZLinear = 1;
-
 //MENU
 
 #define GAIN    0
@@ -98,6 +97,9 @@ uint8_t menuPage = JAM;
 
 // GAIN MENU
 uint8_t GselectedCV = 0;
+  //MODE - LINEAR/NONLINEAR BRIGHTNESS
+  bool lampALinear = true;
+  bool lampZLinear = true;
 
 //DECAY MENU
 uint8_t DselectedCV = 0;

@@ -1,7 +1,9 @@
+
+
 const double ledPWMfreq = 40000.0; //Hz
-double dutyR = 100.0;
-double dutyG = 100.0;
-double dutyB = 100.0;
+
+#define BLINK_INTERVAL_MS 500
+
 RP2040_PWM* PWM_ledR;
 RP2040_PWM* PWM_ledG;
 RP2040_PWM* PWM_ledB;
@@ -36,45 +38,69 @@ double rgbToDuty(uint8_t input){
 }
 
 uint8_t LHandlerState = 0;
+uint16_t blinkCounter = 0;
+bool blinkState = true;
 void LEDHandler(){
+  blinkCounter++;
+  if(blinkCounter >= ((BLINK_INTERVAL_MS*1000)/TIMER1_INTERVAL_uS)){
+    blinkState = !blinkState;
+    blinkCounter = 0;
+  }
+
   if(LHandlerState%2 == 0){
     PWM_ledR->setPWM(RED_LED_PIN,   ledPWMfreq, 100, true);
     PWM_ledG->setPWM(GRN_LED_PIN, ledPWMfreq, 100, true);
     PWM_ledB->setPWM(BLU_LED_PIN,  ledPWMfreq, 100, true);
   }
   else{
+    LEDcolor setLEDColor;
     switch(LHandlerState){
     case 1:
       digitalWrite(SLCT_LED_PIN,  LOW);
       digitalWrite(MODE_LED_PIN,    HIGH);
-      PWM_ledR->setPWM(RED_LED_PIN,   ledPWMfreq, rgbToDuty(modeLED.r), false);
-      PWM_ledG->setPWM(GRN_LED_PIN, ledPWMfreq, rgbToDuty(modeLED.g), false);
-      PWM_ledB->setPWM(BLU_LED_PIN,  ledPWMfreq, rgbToDuty(modeLED.b), false);
+      if(blinkState && blinkModeLED){
+        setLEDColor = OFF;
+      }
+      else{
+        setLEDColor = modeLED;
+      }
       break;
     case 3:
       digitalWrite(MODE_LED_PIN,    LOW);
       digitalWrite(PLUS_LED_PIN,    HIGH);
-      PWM_ledR->setPWM(RED_LED_PIN,   ledPWMfreq, rgbToDuty(plusLED.r), true);
-      PWM_ledG->setPWM(GRN_LED_PIN, ledPWMfreq, rgbToDuty(plusLED.g), true);
-      PWM_ledB->setPWM(BLU_LED_PIN,  ledPWMfreq, rgbToDuty(plusLED.b), true);
+      if(blinkState && blinkPlusLED){
+        setLEDColor = OFF;
+      }
+      else{
+        setLEDColor = plusLED;
+      }
       break;
     case 5:
       digitalWrite(PLUS_LED_PIN,    LOW);
       digitalWrite(MNUS_LED_PIN,   HIGH);
-      PWM_ledR->setPWM(RED_LED_PIN,   ledPWMfreq, rgbToDuty(minusLED.r), true);
-      PWM_ledG->setPWM(GRN_LED_PIN, ledPWMfreq, rgbToDuty(minusLED.g), true);
-      PWM_ledB->setPWM(BLU_LED_PIN,  ledPWMfreq, rgbToDuty(minusLED.b), true);
+      if(blinkState && blinkMinusLED){
+        setLEDColor = OFF;
+      }
+      else{
+        setLEDColor = minusLED;
+      }
       break;
     case 7:
       digitalWrite(MNUS_LED_PIN,   LOW);
       digitalWrite(SLCT_LED_PIN,  HIGH);
-      PWM_ledR->setPWM(RED_LED_PIN,   ledPWMfreq, rgbToDuty(selectLED.r), true);
-      PWM_ledG->setPWM(GRN_LED_PIN, ledPWMfreq, rgbToDuty(selectLED.g), true);
-      PWM_ledB->setPWM(BLU_LED_PIN,  ledPWMfreq, rgbToDuty(selectLED.b), true);
+      if(blinkState && blinkSelectLED){
+        setLEDColor = OFF;
+      }
+      else{
+        setLEDColor = selectLED;
+      }
       break;
     default:
       break;
     }
+    PWM_ledR->setPWM(RED_LED_PIN,   ledPWMfreq, rgbToDuty(setLEDColor.r), false);
+    PWM_ledG->setPWM(GRN_LED_PIN, ledPWMfreq, rgbToDuty(setLEDColor.g), false);
+    PWM_ledB->setPWM(BLU_LED_PIN,  ledPWMfreq, rgbToDuty(setLEDColor.b), false);
   }
   
   LHandlerState++;
