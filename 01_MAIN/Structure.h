@@ -63,7 +63,7 @@ LEDcolor selectLED      = {0,0,0};
 bool blinkModeLED    = false;
 bool blinkPlusLED    = false;
 bool blinkMinusLED   = false;
-bool blinkSelectLED  = true;
+bool blinkSelectLED  = false;
 //STRIPS
 
 #define TRIG_RANDOM 0 //reaction to program signal

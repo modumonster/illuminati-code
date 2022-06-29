@@ -2,7 +2,7 @@
 
 const double ledPWMfreq = 40000.0; //Hz
 
-#define BLINK_INTERVAL_MS 500
+#define BLINK_INTERVAL_MS 200
 
 RP2040_PWM* PWM_ledR;
 RP2040_PWM* PWM_ledG;
@@ -39,7 +39,7 @@ double rgbToDuty(uint8_t input){
 
 uint8_t LHandlerState = 0;
 uint16_t blinkCounter = 0;
-bool blinkState = true;
+bool blinkState = false;
 void LEDHandler(){
   blinkCounter++;
   if(blinkCounter >= ((BLINK_INTERVAL_MS*1000)/TIMER1_INTERVAL_uS)){
@@ -120,6 +120,11 @@ void updateLEDs(){
   switch(menuPage){
     case GAIN:
       modeLED   = MENUcolor[GAIN];
+        blinkModeLED = false;
+      if(GselectedCV == A && !lampALinear || GselectedCV == Z && !lampZLinear){
+        blinkModeLED = true;
+        blinkCounter = 0;
+      }
       plusLED   = GAINMINcolor[CV[GselectedCV].minIndex];
       minusLED  = GAINMAXcolor[CV[GselectedCV].maxIndex];
       selectLED = CVcolor[GselectedCV];
