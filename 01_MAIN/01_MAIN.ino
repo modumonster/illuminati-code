@@ -1,8 +1,8 @@
 #include "RP2040_PWM.h"
 #include "RPi_Pico_TimerInterrupt.h"
-
 #include <Button2.h>
 #include <Adafruit_NeoPixel.h>
+#include <EEPROM.h>
 
 #include "HW.h"
 #include "Structure.h"
@@ -46,12 +46,15 @@ void setup() {
   // init interrupt
   ITimer0.attachInterruptInterval(TIMER0_INTERVAL_uS, TimerHandler0);
   ITimer1.attachInterruptInterval(TIMER1_INTERVAL_uS, TimerHandler1);
-  
+  while(!Serial){}
   ledsInit();
   lampInit();
   stripsInit();
   CVInit();
   buttonInit();
+  EEPROMInit();
+  printSettings();
+  updateLEDs();
 }
 
 void loop() {

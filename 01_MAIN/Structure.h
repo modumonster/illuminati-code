@@ -1,3 +1,5 @@
+#define NUMBER_OF_CVS 6
+
 struct CVstruct{
   uint16_t rawValue;
   uint16_t rawLastValue;
@@ -27,7 +29,7 @@ const uint8_t rfTime[3] = {0,5,10}; //selectable rise/fall times [ms]
 #define A 4
 #define Z 5
 
-CVstruct CV[7];
+CVstruct CV[NUMBER_OF_CVS];
 
 struct LEDcolor{
   uint8_t r; //0-255

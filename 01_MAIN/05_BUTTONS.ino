@@ -224,6 +224,7 @@ void clickHandler(Button2& btn){
         case SETUP:
             if(btnId == MODE){
               Serial.println("SETUP \t| Mode pressed");
+              saveToEEPROM();
             }
             else if(btnId == PLUS){
               Serial.println("SETUP \t| Plus pressed");

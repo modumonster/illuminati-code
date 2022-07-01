@@ -125,35 +125,7 @@ void CVRead(){
   }
   CVswitch = !CVswitch;
 }
-void printCV(){
-  Serial.print("R:"); Serial.print(CV[R].rawValue); Serial.print(" -> "); Serial.print(toValue(R)); Serial.print("\t");
-  Serial.print("G:"); Serial.print(CV[G].rawValue); Serial.print(" -> "); Serial.print(toValue(G)); Serial.print("\t");
-  Serial.print("B:"); Serial.print(CV[B].rawValue); Serial.print(" -> "); Serial.print(toValue(B)); Serial.print("\t");
-  Serial.print("P:"); Serial.print(CV[P].rawValue); Serial.print(" -> "); Serial.print(toValue(P)); Serial.print("\t");
-  Serial.print("A:"); Serial.print(CV[A].rawValue); Serial.print(" -> "); Serial.print(toValue(A)); Serial.print("\t");
-  Serial.print("Z:"); Serial.print(CV[Z].rawValue); Serial.print(" -> "); Serial.print(toValue(Z)); Serial.println("\t");
-}
 
-String x=" : "; //spacer
-
-void printRanges(){
-  Serial.print("R:\t"); Serial.println(CV[R].m5+x+CV[R].m2p5+x+CV[R].p0+x+CV[R].p2p5+x+CV[R].p5); //+x just add " : " to the string
-  Serial.print("G:\t"); Serial.println(CV[G].m5+x+CV[G].m2p5+x+CV[G].p0+x+CV[G].p2p5+x+CV[G].p5);
-  Serial.print("B:\t"); Serial.println(CV[B].m5+x+CV[B].m2p5+x+CV[B].p0+x+CV[B].p2p5+x+CV[B].p5);
-  Serial.print("P:\t"); Serial.println(CV[P].m5+x+CV[P].m2p5+x+CV[P].p0+x+CV[P].p2p5+x+CV[P].p5);
-  Serial.print("A:\t"); Serial.println(CV[A].m5+x+CV[A].m2p5+x+CV[A].p0+x+CV[A].p2p5+x+CV[A].p5);
-  Serial.print("Z:\t"); Serial.println(CV[Z].m5+x+CV[Z].m2p5+x+CV[Z].p0+x+CV[Z].p2p5+x+CV[Z].p5);
-}
-
-void printVolts(){
-  Serial.print("R:"); Serial.print(toVolts(R)); Serial.print("V ");
-  Serial.print("G:"); Serial.print(toVolts(G)); Serial.print("V ");
-  Serial.print("B:"); Serial.print(toVolts(B)); Serial.print("V ");
-  Serial.print("P:"); Serial.print(toVolts(P)); Serial.print("V ");
-  Serial.print("A:"); Serial.print(toVolts(A)); Serial.print("V ");
-  Serial.print("Z:"); Serial.print(toVolts(Z)); Serial.println("V ");
-
-}
 void calibrateCV(){
   
   //bla bla bla, vyhodim data
