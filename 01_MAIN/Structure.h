@@ -81,8 +81,8 @@ struct strip{
   uint8_t intensity = 255; //0-255
 };
 
-strip strip_A;
-strip strip_Z;
+strip stripXdata;
+strip stripYdata;
 
 //MENU
 
@@ -109,5 +109,5 @@ uint8_t DselectedCV = 0;
 //STEPS/ANIMATION/PROGRAM MENU
 uint8_t AselectedStrip = 0;
 #define STRIP_BOTH  0
-#define STRIP_A     1
+#define STRIP_X     1
 #define STRIP_Z     2

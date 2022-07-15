@@ -1,42 +1,42 @@
-Adafruit_NeoPixel stripA(strip_A.pixels, X_STRIP_PIN, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel stripZ(strip_Z.pixels, Y_STRIP_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripX(stripXdata.pixels, X_STRIP_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripY(stripYdata.pixels, Y_STRIP_PIN, NEO_GRB + NEO_KHZ800);
 
 uint8_t Sintensity = 150;
 
 void stripsInit(){
-  stripA.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
-  stripZ.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
-  stripA.clear();
-  stripZ.clear();
+  stripX.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
+  stripY.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
+  stripX.clear();
+  stripY.clear();
 
-  stripA.setBrightness(Sintensity);
-  stripZ.setBrightness(Sintensity);
+  stripX.setBrightness(Sintensity);
+  stripY.setBrightness(Sintensity);
 }
 
-void stripATest() {
-  stripA.clear();
+void stripXTest() {
+  stripX.clear();
   
-  for(int i=0; i<strip_A.pixels; i++) {
-    stripA.setPixelColor(i, stripA.Color(0, 150, 0));
-    stripA.show();
+  for(int i=0; i<stripXdata.pixels; i++) {
+    stripX.setPixelColor(i, stripX.Color(0, 150, 0));
+    stripX.show();
     delay(500);
   }
 }
 
 void CVtoStrip() {
-  stripA.clear();
-  stripZ.clear();
+  stripX.clear();
+  stripY.clear();
   uint8_t red   = toValue(R);
   uint8_t green = toValue(G);
   uint8_t blue  = toValue(B);
-  uint32_t color = stripA.Color(red,green,blue);
-  stripA.fill(color,0,stripA.numPixels());
-  stripZ.fill(color,0,stripZ.numPixels());
+  uint32_t color = stripX.Color(red,green,blue);
+  stripX.fill(color,0,stripXdata.pixels);
+  stripY.fill(color,0,stripYdata.pixels);
 
-  if(stripA.canShow()){
-    stripA.show();
+  if(stripX.canShow()){
+    stripX.show();
   }
-  if(stripZ.canShow()){
-    stripZ.show();
+  if(stripY.canShow()){
+    stripY.show();
   }
 }

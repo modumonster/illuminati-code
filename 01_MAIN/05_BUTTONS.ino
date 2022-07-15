@@ -129,27 +129,26 @@ void clickHandler(Button2& btn){
             }
             else if(btnId == MINUS){                      // type - trig->random, trig->next, V/OCT steps,
               if(AselectedStrip == STRIP_BOTH){
-                strip_A.reaction = strip_A.reaction;
-                strip_A.reaction++;
-                if(strip_A.reaction > 3){
-                  strip_A.reaction = 0;
+                stripXdata.reaction++;
+                if(stripXdata.reaction > 3){
+                  stripXdata.reaction = 0;
                 }
-                strip_Z.reaction = strip_A.reaction;
-                Serial.print("STEPS \t| Reaction set for A and Z to "); Serial.println(strip_A.reaction);
+                stripYdata.reaction = stripXdata.reaction;
+                Serial.print("STEPS \t| Reaction set for A and Z to "); Serial.println(stripXdata.reaction);
               }
-              else if (AselectedStrip == STRIP_A){
-                strip_A.reaction++;
-                if(strip_A.reaction > 3){
-                  strip_A.reaction = 0;
+              else if (AselectedStrip == STRIP_X){
+                stripXdata.reaction++;
+                if(stripXdata.reaction > 3){
+                  stripXdata.reaction = 0;
                 }
-                Serial.print("STEPS \t| Reaction set for A to "); Serial.println(strip_A.reaction);
+                Serial.print("STEPS \t| Reaction set for A to "); Serial.println(stripXdata.reaction);
               }
               else if (AselectedStrip == STRIP_Z){
-                strip_Z.reaction++;
-                if(strip_Z.reaction > 3){
-                  strip_Z.reaction = 0;
+                stripYdata.reaction++;
+                if(stripYdata.reaction > 3){
+                  stripYdata.reaction = 0;
                 }
-                Serial.print("STEPS \t| Reaction set for Z to "); Serial.println(strip_Z.reaction);
+                Serial.print("STEPS \t| Reaction set for Z to "); Serial.println(stripYdata.reaction);
               }
             }
             else if(btnId == SELECT){ //both /set for RGB strip A/ strip Z RGB
