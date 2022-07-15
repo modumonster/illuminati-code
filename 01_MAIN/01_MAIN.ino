@@ -7,7 +7,7 @@
 #include "HW.h"
 #include "Structure.h"
 
-#define TIMER0_INTERVAL_uS 1000
+#define TIMER0_INTERVAL_uS 2000
 #define TIMER1_INTERVAL_uS 500
 
 RPI_PICO_Timer ITimer0(0);
@@ -23,7 +23,6 @@ bool TimerHandler0(struct repeating_timer *t)
 
   CVRead();
   CVtoLamp();
-  CVtoStrip();
   //printCV();
   return true;
 }
@@ -46,7 +45,7 @@ void setup() {
   // init interrupt
   ITimer0.attachInterruptInterval(TIMER0_INTERVAL_uS, TimerHandler0);
   ITimer1.attachInterruptInterval(TIMER1_INTERVAL_uS, TimerHandler1);
-  while(!Serial){}
+  //while(!Serial){}
   ledsInit();
   lampInit();
   stripsInit();
@@ -59,4 +58,5 @@ void setup() {
 
 void loop() {
   buttons();
+  CVtoStrip();
 }
