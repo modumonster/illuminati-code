@@ -34,7 +34,7 @@ void ledsInit(){
 }
 
 double rgbToDuty(uint8_t input){
-  return 100.0-((double)input/255)*Lintensity;
+  return 100.0-mapd((double)input,0,255,0,1)*Lintensity;
 }
 
 uint8_t LHandlerState = 0;
