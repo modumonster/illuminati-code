@@ -28,29 +28,27 @@ void printPWMInfo(RP2040_PWM* PWM_Instance)
   PWM_LOGDEBUG5("TOP =", top, ", DIV =", div, ", CPU_freq =", PWM_Instance->get_freq_CPU());
 }
 
-double lastA = 0;
-double lastZ = 0;
-double valA;
-double valZ;
+uint8_t lastA = 0;
+uint8_t lastZ = 0;
+uint8_t valA;
+uint8_t valZ;
 
 void CVtoLamp(){
-  double valA;
   if(lampALinear){
     valA = cie(toValue(A));
   }
   else{
-    valA = mapd(toValue(A),0,255,0,100);
+    valA = map(toValue(A),0,255,0,100);
   }
   if(lastA != valA){
   PWM_lampA->setPWM(A_LAMP_PIN, lampPWMfreq, valA, true);
     lastA = valA;
-    //printPWMInfo(PWM_lampA);
   }
   if(lampZLinear){
     valZ = cie(toValue(Z));
   }
   else{
-    valZ = mapd(toValue(Z),0,255,0,100);
+    valZ = map(toValue(Z),0,255,0,100);
   }
   if(lastZ != valZ){
     PWM_lampZ->setPWM(Z_LAMP_PIN, lampPWMfreq, valZ, true);
