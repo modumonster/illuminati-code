@@ -16,15 +16,26 @@ double mapd(double x, double in_min, double in_max, double out_min, double out_m
     return out;
 }
 
+
+char s [80];
 void printCV(){
-  Serial.print("R:"); Serial.print(CV[R].rawValue); Serial.print(" -> "); Serial.print(toValue(R)); Serial.print("\t");
-  Serial.print("G:"); Serial.print(CV[G].rawValue); Serial.print(" -> "); Serial.print(toValue(G)); Serial.print("\t");
-  Serial.print("B:"); Serial.print(CV[B].rawValue); Serial.print(" -> "); Serial.print(toValue(B)); Serial.print("\t");
-  Serial.print("P:"); Serial.print(CV[P].rawValue); Serial.print(" -> "); Serial.print(toValue(P)); Serial.print("\t");
-  Serial.print("A:"); Serial.print(CV[A].rawValue); Serial.print(" -> "); Serial.print(toValue(A)); Serial.print("\t");
-  Serial.print("Z:"); Serial.print(CV[Z].rawValue); Serial.print(" -> "); Serial.print(toValue(Z)); Serial.println("\t");
+  Serial.print("R:"); Serial.print(CV[R].rawValue); Serial.print(" -> "); Serial.print(CV[R].avgValue); Serial.print(" -> "); Serial.print(toValue(R)); Serial.print("\t");
+  Serial.print("G:"); Serial.print(CV[G].rawValue); Serial.print(" -> "); Serial.print(CV[G].avgValue); Serial.print(" -> ");Serial.print(toValue(G)); Serial.print("\t");
+  Serial.print("B:"); Serial.print(CV[B].rawValue); Serial.print(" -> "); Serial.print(CV[B].avgValue); Serial.print(" -> ");Serial.print(toValue(B)); Serial.print("\t");
+  Serial.print("P:"); Serial.print(CV[P].rawValue); Serial.print(" -> "); Serial.print(CV[P].avgValue); Serial.print(" -> ");Serial.print(toValue(P)); Serial.print("\t");
+  Serial.print("A:"); Serial.print(CV[A].rawValue); Serial.print(" -> "); Serial.print(CV[A].avgValue); Serial.print(" -> ");Serial.print(toValue(A)); Serial.print("\t");
+  Serial.print("Z:"); Serial.print(CV[Z].rawValue); Serial.print(" -> "); Serial.print(CV[Z].avgValue); Serial.print(" -> ");Serial.print(toValue(Z)); Serial.println("\t");
 }
 
+void plotCV(){
+  Serial.println("R:,Rsmooth:,G:,Gsmooth,B,Bsmooth,P,Psmooth,A,Asmooth,Z,Zsmooth");
+  Serial.print(CV[R].rawValue);Serial.print(",");Serial.print(CV[R].avgValue);Serial.print(",");
+  Serial.print(CV[G].rawValue);Serial.print(",");Serial.print(CV[G].avgValue);Serial.print(",");
+  Serial.print(CV[B].rawValue);Serial.print(",");Serial.print(CV[B].avgValue);Serial.print(",");
+  Serial.print(CV[P].rawValue);Serial.print(",");Serial.print(CV[P].avgValue);Serial.print(",");
+  Serial.print(CV[A].rawValue);Serial.print(",");Serial.print(CV[A].avgValue);Serial.print(",");
+  Serial.print(CV[Z].rawValue);Serial.print(",");Serial.print(CV[Z].avgValue);Serial.print(",");
+}
 String x=" : "; //spacer
 
 void printRanges(){

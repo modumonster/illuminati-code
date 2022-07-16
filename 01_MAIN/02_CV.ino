@@ -1,3 +1,11 @@
+#define AV_N 3
+ZzzMovingAvg <AV_N, uint16_t, uint16_t> rAvg;
+ZzzMovingAvg <AV_N, uint16_t, uint16_t> gAvg;
+ZzzMovingAvg <AV_N, uint16_t, uint16_t> bAvg;
+ZzzMovingAvg <AV_N, uint16_t, uint16_t> pAvg;
+ZzzMovingAvg <AV_N, uint16_t, uint16_t> aAvg;
+ZzzMovingAvg <AV_N, uint16_t, uint16_t> zAvg;
+
 void CVInit(){
   analogReadResolution(12);
   pinMode(RG_IN_PIN, INPUT);
@@ -41,7 +49,7 @@ const bool readGPZ = 1;
 
 bool CVswitch = readRBA;
 double toValue(uint8_t index){
-  return mapd(CV[index].rawValue,rangeMin(CV[index]),rangeMax(CV[index]),0,255);
+  return mapd(CV[index].avgValue,rangeMin(CV[index]),rangeMax(CV[index]),0,255);
 }
 
 double toVolts(uint8_t index){
@@ -109,6 +117,12 @@ void CVRead(){
       CV[R].rawValue = analogRead(RG_IN_PIN);
       CV[B].rawValue = analogRead(BP_IN_PIN);
       CV[A].rawValue = analogRead(AZ_IN_PIN);
+      rAvg.add(CV[R].rawValue);
+      gAvg.add(CV[G].rawValue);
+      bAvg.add(CV[B].rawValue);
+      CV[R].avgValue = rAvg.get();
+      CV[B].avgValue = bAvg.get();
+      CV[A].avgValue = aAvg.get();
       digitalWrite(AZ_CTRL_PIN, HIGH);
       digitalWrite(RG_CTRL_PIN, HIGH);
       digitalWrite(BP_CTRL_PIN, HIGH);
@@ -118,6 +132,12 @@ void CVRead(){
       CV[G].rawValue = analogRead(RG_IN_PIN);
       CV[P].rawValue = analogRead(BP_IN_PIN);
       CV[Z].rawValue = analogRead(AZ_IN_PIN);
+      gAvg.add(CV[G].rawValue);
+      pAvg.add(CV[P].rawValue);
+      zAvg.add(CV[Z].rawValue);
+      CV[G].avgValue = gAvg.get();
+      CV[P].avgValue = pAvg.get();
+      CV[Z].avgValue = zAvg.get();
       digitalWrite(AZ_CTRL_PIN, LOW);
       digitalWrite(RG_CTRL_PIN, LOW);
       digitalWrite(BP_CTRL_PIN, LOW);
