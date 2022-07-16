@@ -38,7 +38,7 @@ struct LEDcolor{
   uint8_t b;
 };
 
-double Lintensity = 30.0;
+double Lintensity = 100.0;
 
 const LEDcolor RED      = {255,0,0};
 const LEDcolor GREEN    = {0,255,0};
