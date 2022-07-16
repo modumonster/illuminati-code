@@ -9,7 +9,7 @@
 #include "Structure.h"
 
 #define TIMER0_INTERVAL_uS 4000
-#define TIMER1_INTERVAL_uS 1000
+#define TIMER1_INTERVAL_uS 250
 #define TIMER2_INTERVAL_uS 8000
 
 RPI_PICO_Timer ITimer0(0);
@@ -49,8 +49,8 @@ bool TimerHandler2(struct repeating_timer *t)
   Serial.print("ITimer2: millis() = "); Serial.println(millis());
 #endif
 
-  //printCV();
-  plotCV();
+  printCV();
+  //plotCV();
   CVtoLamp();
   return true;
 }

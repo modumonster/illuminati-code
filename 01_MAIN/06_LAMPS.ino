@@ -4,8 +4,8 @@ RP2040_PWM* PWM_lampA;
 RP2040_PWM* PWM_lampZ;
 
 void lampInit(){
-  PWM_lampA = new RP2040_PWM(A_LAMP_PIN, lampPWMfreq, 100.0);
-  PWM_lampZ = new RP2040_PWM(Z_LAMP_PIN, lampPWMfreq, 100.0);
+  PWM_lampA = new RP2040_PWM(A_LAMP_PIN, lampPWMfreq, 0.0);
+  PWM_lampZ = new RP2040_PWM(Z_LAMP_PIN, lampPWMfreq, 0.0);
 
   if (PWM_lampA)
   {

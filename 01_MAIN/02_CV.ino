@@ -118,8 +118,8 @@ void CVRead(){
       CV[B].rawValue = analogRead(BP_IN_PIN);
       CV[A].rawValue = analogRead(AZ_IN_PIN);
       rAvg.add(CV[R].rawValue);
-      gAvg.add(CV[G].rawValue);
       bAvg.add(CV[B].rawValue);
+      aAvg.add(CV[A].rawValue);
       CV[R].avgValue = rAvg.get();
       CV[B].avgValue = bAvg.get();
       CV[A].avgValue = aAvg.get();

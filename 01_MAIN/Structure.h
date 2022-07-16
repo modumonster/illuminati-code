@@ -2,7 +2,7 @@
 
 struct CVstruct{
   uint16_t rawValue;
-  uint16_t avgValue; //running average output
+  uint16_t avgValue = 0; //running average output
   uint16_t rawLastValue;
 
   //GAIN Min/Max
