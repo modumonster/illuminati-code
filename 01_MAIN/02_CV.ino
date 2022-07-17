@@ -1,4 +1,4 @@
-#define AV_N 3
+#define AV_N 8
 ZzzMovingAvg <AV_N, uint16_t, uint16_t> rAvg;
 ZzzMovingAvg <AV_N, uint16_t, uint16_t> gAvg;
 ZzzMovingAvg <AV_N, uint16_t, uint16_t> bAvg;
@@ -48,8 +48,11 @@ const bool readRBA = 0;
 const bool readGPZ = 1;
 
 bool CVswitch = readRBA;
+
 double toValue(uint8_t index){
-  return mapd(CV[index].avgValue,rangeMin(CV[index]),rangeMax(CV[index]),0,255);
+  double result; //added for autoGain issues, which will need to be addressed later
+  result = mapd(CV[index].avgValue,rangeMin(CV[index]),rangeMax(CV[index]),0,255);
+  return result;
 }
 
 double toVolts(uint8_t index){
@@ -85,13 +88,16 @@ void calcRanges(){ //need to do this better
 
 uint16_t rangeMin(CVstruct &data){
   uint16_t minimum;
-  if(data.minIndex == 0){
-    minimum = data.m5;
+  if(data.minIndex == 0){//automatic gain
+    minimum = data.minimum;
   }
   else if(data.minIndex == 1){
-    minimum = data.m2p5;
+    minimum = data.m5;
   }
   else if(data.minIndex == 2){
+    minimum = data.m2p5;
+  }
+  else if(data.minIndex == 3){
     minimum = data.p0;
   }
   return minimum;
@@ -100,17 +106,41 @@ uint16_t rangeMin(CVstruct &data){
 uint16_t rangeMax(CVstruct &data){
   uint16_t maximum;
   if(data.maxIndex == 0){
-    maximum = data.p5;
+    maximum = data.maximum;
   }
   else if(data.maxIndex == 1){
-    maximum = data.p2p5;
+    maximum = data.p5;
   }
   else if(data.maxIndex == 2){
+    maximum = data.p2p5;
+  }
+  else if(data.maxIndex == 3){
     maximum = data.p0;
   }
   return maximum;
 }
 
+void checkAutogain(CVstruct &data){
+  if(data.autoMin && (data.minimum > data.avgValue)){
+    data.minimum = data.avgValue;
+  }
+  if(data.autoMax && (data.maximum < data.avgValue)){
+    data.maximum = data.avgValue;
+  }
+}
+
+void updateAutogain(){
+  if(CVswitch == readRBA){
+    checkAutogain(CV[R]);
+    checkAutogain(CV[B]);
+    checkAutogain(CV[A]);
+  }
+  else if(CVswitch == readGPZ){
+    checkAutogain(CV[G]);
+    checkAutogain(CV[P]);
+    checkAutogain(CV[Z]);
+  }
+}
 void CVRead(){
   switch(CVswitch){
     case readRBA:
@@ -143,6 +173,7 @@ void CVRead(){
       digitalWrite(BP_CTRL_PIN, LOW);
       break;
   }
+  updateAutogain();
   CVswitch = !CVswitch;
 }
 

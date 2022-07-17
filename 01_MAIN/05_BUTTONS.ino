@@ -72,17 +72,29 @@ void clickHandler(Button2& btn){
                 lampZLinear = !lampZLinear;
               }
             }
-            else if(btnId == PLUS){     //-5/-2.5/-0 minimum voltage
+            else if(btnId == PLUS){     //autoMin/-5/-2.5/-0 minimum voltage
               CV[GselectedCV].minIndex++;
-              if(CV[GselectedCV].minIndex > 2){
+              if(CV[GselectedCV].minIndex > 3){
                 CV[GselectedCV].minIndex = 0;
-              }              
+              }
+              if(CV[GselectedCV].minIndex == 0){
+                CV[GselectedCV].autoMin = true;
+              }
+              else{
+                CV[GselectedCV].autoMin = false;
+              }
               Serial.print("GAIN\t| Min of CV ");Serial.print(GselectedCV); Serial.print(" set to "); Serial.println(CV[GselectedCV].minIndex);
             }
-            else if(btnId == MINUS){    //5/2.5/0 maximum voltage
+            else if(btnId == MINUS){    //autoMax/5/2.5/0 maximum voltage
               CV[GselectedCV].maxIndex++;
-              if(CV[GselectedCV].maxIndex > 2){
+              if(CV[GselectedCV].maxIndex > 3){
                 CV[GselectedCV].maxIndex = 0;
+              }
+              if(CV[GselectedCV].maxIndex == 0){
+                CV[GselectedCV].autoMax = true;
+              }
+              else{
+                CV[GselectedCV].autoMax = false;
               }
               Serial.print("GAIN\t| Max of CV ");Serial.print(GselectedCV); Serial.print(" set to "); Serial.println(CV[GselectedCV].maxIndex);
             }

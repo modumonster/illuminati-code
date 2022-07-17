@@ -8,7 +8,9 @@ struct CVstruct{
   //GAIN Min/Max
   uint8_t minIndex = 0; // 0->m5, 1->m2p5, 2->p0
   uint8_t maxIndex = 0; // 0->p5, 1->p2p5, 2->p0
-  
+
+  bool autoMin = false;
+  bool autoMax = false;
   //DECAY times
   uint8_t riseTime = 0; // 0->0ms, 1->5ms, 2->10ms
   uint8_t fallTime = 0; // 0->0ms, 1->5ms, 2->10ms
@@ -19,6 +21,9 @@ struct CVstruct{
   uint16_t m5;          //calculated from calibration (int for -5V)
   uint16_t m2p5;        //(int for -2.5V)
   uint16_t p2p5;
+
+  uint16_t minimum = 65535;
+  uint16_t maximum = 0;
 };
 
 const uint8_t rfTime[3] = {0,5,10}; //selectable rise/fall times [ms]
@@ -54,8 +59,8 @@ const LEDcolor CVcolor[6]       = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
 const LEDcolor STRIPcolor[3]    = {RED,GREEN,BLUE};
 const LEDcolor MENUcolor[8]     = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF,OFF};
 const LEDcolor RFcolor[3]       = {RED,GREEN,BLUE}; // 0ms, 5ms, 10ms
-const LEDcolor GAINMINcolor[3]  = {RED,GREEN,BLUE};
-const LEDcolor GAINMAXcolor[3]  = {RED,GREEN,BLUE};
+const LEDcolor GAINMINcolor[]  = {YELLOW,RED,GREEN,BLUE};
+const LEDcolor GAINMAXcolor[]  = {YELLOW,RED,GREEN,BLUE};
 const LEDcolor REACTcolor[4]    = {RED,GREEN,BLUE,YELLOW};
 
 LEDcolor modeLED        = {0,0,0};
