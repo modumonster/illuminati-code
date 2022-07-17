@@ -162,7 +162,8 @@ void updateLEDs(){
       modeLED   = MENUcolor[STRIPS];
       plusLED   = MENUcolor[STRIPS];
       minusLED  = MENUcolor[STRIPS];
-      selectLED = MENUcolor[STRIPS];
+      selectLED = STRIPcolor[SselectedStrip];
+
       break;
     case CAL:
       modeLED   = MENUcolor[CAL];

@@ -79,7 +79,7 @@ bool blinkSelectLED  = false;
 #define VOCT_STEPS  2
 
 struct strip{
-  uint8_t pixels = 16;
+  uint8_t pixels = 1;
 
   uint8_t reaction; // TRIG_RANDOM, TRIG_NEXT, VOCT_STEPS (8 steps)
   uint8_t steps[8] = {0,1,2,3,4,5,6,7};
@@ -116,4 +116,9 @@ uint8_t DselectedCV = 0;
 uint8_t AselectedStrip = 0;
 #define STRIP_BOTH  0
 #define STRIP_X     1
-#define STRIP_Z     2
+#define STRIP_Y     2
+
+//STRIPS MENU - setup strip pixels etc
+uint8_t SselectedStrip = 0; //uses the same defines as AselectedStrip
+#define ADD       0 //for updateStripLength function
+#define SUBTRACT  1

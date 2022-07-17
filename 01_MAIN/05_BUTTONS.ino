@@ -155,7 +155,7 @@ void clickHandler(Button2& btn){
                 }
                 Serial.print("STEPS \t| Reaction set for A to "); Serial.println(stripXdata.reaction);
               }
-              else if (AselectedStrip == STRIP_Z){
+              else if (AselectedStrip == STRIP_Y){
                 stripYdata.reaction++;
                 if(stripYdata.reaction > 3){
                   stripYdata.reaction = 0;
@@ -206,16 +206,21 @@ void clickHandler(Button2& btn){
   
         case STRIPS:
             if(btnId == MODE){
-              Serial.println("STRIPS \t| Mode pressed");
+              Serial.println("STRIPS \t| Mode pressed"); //no function for now
             }
-            else if(btnId == PLUS){
-              Serial.println("STRIPS \t| Plus pressed");
+            else if(btnId == PLUS){ //add pixel
+              updateStripLength(ADD,SselectedStrip);
             }
             else if(btnId == MINUS){
-              Serial.println("STRIPS \t| Minus pressed");
+              updateStripLength(SUBTRACT,SselectedStrip);
             }
             else if(btnId == SELECT){
-              Serial.println("STRIPS \t| Select pressed");
+              //select strip
+              SselectedStrip++;
+              if(SselectedStrip > 2){
+                SselectedStrip = 0;
+              }
+              Serial.print("STRIPS \t| Selected strip "); Serial.println(SselectedStrip);
             }
           break;
         case CAL:
