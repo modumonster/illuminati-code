@@ -173,7 +173,9 @@ void clickHandler(Button2& btn){
           break;
         case JAM:
             if(btnId == MODE){
-              //go to black
+              //go to black or go from black
+              //for now without any fade
+              lightsOn = !lightsOn;
               Serial.println("JAM \t| Go to black");
             }
             else if(btnId == PLUS){

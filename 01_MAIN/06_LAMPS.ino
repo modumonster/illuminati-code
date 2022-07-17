@@ -34,21 +34,27 @@ uint8_t valA;
 uint8_t valZ;
 
 void CVtoLamp(){
-  if(lampALinear){
+  if(lampALinear && lightsOn){
     valA = cie(toValue(A));
   }
-  else{
+  else if(!lampALinear && lightsOn){
     valA = map(toValue(A),0,255,0,100);
+  }
+  else if(!lightsOn){
+    valA = 0.0;
   }
   if(lastA != valA){
   PWM_lampA->setPWM(A_LAMP_PIN, lampPWMfreq, valA, true);
     lastA = valA;
   }
-  if(lampZLinear){
+  if(lampZLinear && lightsOn){
     valZ = cie(toValue(Z));
   }
-  else{
+  else if(!lampZLinear && lightsOn){
     valZ = map(toValue(Z),0,255,0,100);
+  }
+  else if(!lightsOn){
+    valZ = 0.0;
   }
   if(lastZ != valZ){
     PWM_lampZ->setPWM(Z_LAMP_PIN, lampPWMfreq, valZ, true);

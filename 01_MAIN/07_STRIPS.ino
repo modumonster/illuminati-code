@@ -100,10 +100,30 @@ void CVtoStrip() {
   stripX.fill(color,0,stripXdata.pixels);
   stripY.fill(color,0,stripYdata.pixels);
 
-  if(stripX.canShow()){
+  if(!lightsOn && (stripX.getBrightness() != 0)){
+    stripX.setBrightness(0);
     stripX.show();
   }
-  if(stripY.canShow()){
+  else if(lightsOn && (stripX.getBrightness() == 0)){
+    stripX.setBrightness(Sintensity);
+    stripX.show();
+  }
+  else{
+    if(stripX.canShow()){
+      stripX.show();
+    }
+  }
+  if(!lightsOn && (stripY.getBrightness() != 0)){
+    stripY.setBrightness(0);
     stripY.show();
+  }
+  else if(lightsOn && (stripY.getBrightness() == 0)){
+    stripY.setBrightness(Sintensity);
+    stripY.show();
+  }
+  else{
+    if(stripY.canShow()){  
+    stripY.show();
+    }
   }
 }

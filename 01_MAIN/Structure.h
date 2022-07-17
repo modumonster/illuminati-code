@@ -118,6 +118,9 @@ uint8_t AselectedStrip = 0;
 #define STRIP_X     1
 #define STRIP_Y     2
 
+//JAM MENU
+bool lightsOn = true;
+
 //STRIPS MENU - setup strip pixels etc
 uint8_t SselectedStrip = 0; //uses the same defines as AselectedStrip
 #define ADD       0 //for updateStripLength function
