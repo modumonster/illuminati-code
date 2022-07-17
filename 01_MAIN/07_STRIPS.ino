@@ -1,8 +1,6 @@
 Adafruit_NeoPixel stripX(stripXdata.pixels, X_STRIP_PIN, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel stripY(stripYdata.pixels, Y_STRIP_PIN, NEO_GRB + NEO_KHZ800);
 
-uint8_t Sintensity = 50;
-
 void stripsInit(){
   stripX.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
   stripY.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
@@ -16,8 +14,8 @@ void stripsInit(){
   stripX.updateLength(stripXdata.pixels);
   stripY.updateLength(stripYdata.pixels);
   
-  stripX.setBrightness(Sintensity);
-  stripY.setBrightness(Sintensity);
+  stripX.setBrightness(stripXdata.intensity);
+  stripY.setBrightness(stripYdata.intensity);
 }
 
 void stripXTest() {
@@ -121,7 +119,7 @@ void CVtoStrip() {
     colorLastX = color; //store last shown color
   }
   else if(lightsOn && (stripX.getBrightness() == 0)){
-    stripX.setBrightness(Sintensity);
+    stripX.setBrightness(stripXdata.intensity);
     stripX.fill(colorLastX,0,stripXdata.pixels);
   }
   
@@ -130,7 +128,7 @@ void CVtoStrip() {
     colorLastY = color; //store last shown color
   }
   else if(lightsOn && (stripY.getBrightness() == 0)){
-    stripY.setBrightness(Sintensity);
+    stripY.setBrightness(stripXdata.intensity);
     stripY.fill(colorLastY,0,stripYdata.pixels);
   }
 
