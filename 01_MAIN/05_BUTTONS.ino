@@ -339,10 +339,10 @@ void lpDetectedHandler(Button2& btn){
     menuPage = STRIPS;
   }
   if(modeAndSelect >= 2){
-    menuPage = SETUP;
+    menuPage = CAL;
   }
   if(plusAndMinus >= 2){
-    menuPage = CAL;
+    menuPage = SETUP;
   }
   Serial.print("Now you are in menu ");Serial.println(menuPage);
   updateLEDs();
