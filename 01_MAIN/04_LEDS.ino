@@ -171,7 +171,11 @@ void updateLEDs(){
       selectLED = MENUcolor[MIDI];
       break;
     case STRIPS:
+      blinkModeLED = false;
       modeLED   = MENUcolor[STRIPS];
+      if(editBrightness){
+        blinkModeLED = true;
+      }
       plusLED   = MENUcolor[STRIPS];
       minusLED  = MENUcolor[STRIPS];
       selectLED = STRIPcolor[SselectedStrip];

@@ -219,12 +219,23 @@ void clickHandler(Button2& btn){
         case STRIPS:
             if(btnId == MODE){
               Serial.println("STRIPS \t| Mode pressed"); //no function for now
+              editBrightness = !editBrightness;
             }
             else if(btnId == PLUS){ //add pixel
-              updateStripLength(ADD,SselectedStrip);
+              if(!editBrightness){
+                updateStripLength(ADD,SselectedStrip);
+              }
+              else{ //set to edit brightness
+                updateStripIntensity(ADD,SselectedStrip);
+              }
             }
             else if(btnId == MINUS){
-              updateStripLength(SUBTRACT,SselectedStrip);
+              if(!editBrightness){
+                updateStripLength(SUBTRACT,SselectedStrip);
+              }
+              else{ //set to edit brightness
+                updateStripIntensity(SUBTRACT,SselectedStrip);
+              }
             }
             else if(btnId == SELECT){
               //select strip

@@ -77,7 +77,6 @@ bool blinkSelectLED  = false;
 #define TRIG_RANDOM 0 //reaction to program signal
 #define TRIG_NEXT   1
 #define VOCT_STEPS  2
-
 //animationIndex - index which corresponds to animation
 #define RGB_ANIMATION 0
 
@@ -131,3 +130,4 @@ bool invertSignals = false;
 uint8_t SselectedStrip = 0; //uses the same defines as AselectedStrip
 #define ADD       0 //for updateStripLength function
 #define SUBTRACT  1
+bool editBrightness = false;

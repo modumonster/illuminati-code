@@ -86,6 +86,51 @@ void updateStripLength(uint8_t function, uint8_t index){
   }
 }
 
+void updateStripIntensity(uint8_t function, uint8_t index){
+  if(function == ADD){
+    if(SselectedStrip == STRIP_BOTH){
+      if(stripXdata.intensity < 255){
+        stripXdata.intensity++;
+        stripYdata.intensity = stripXdata.intensity;
+      }
+    }
+    else if(SselectedStrip == STRIP_X){
+      if(stripXdata.intensity < 255){
+        stripXdata.intensity++;
+      }
+    }
+    else if(SselectedStrip == STRIP_Y){
+      if(stripYdata.intensity < 255){
+        stripYdata.intensity++;
+      }
+    }
+  }
+  else if(function == SUBTRACT){
+    if(SselectedStrip == STRIP_BOTH){
+      if(stripXdata.intensity > 1){
+        stripXdata.intensity--;
+        stripYdata.intensity = stripXdata.pixels;
+      }
+    }
+    else if(SselectedStrip == STRIP_X){
+      if(stripXdata.intensity > 1){
+        stripXdata.intensity--;
+      }
+    }
+    else if(SselectedStrip == STRIP_Y){
+      if(stripYdata.intensity > 1){  
+        stripYdata.intensity--;
+      }
+    }
+  }
+
+  if(SselectedStrip == STRIP_BOTH || SselectedStrip == STRIP_X){
+    stripX.setBrightness(stripXdata.intensity);
+  }
+  if(SselectedStrip == STRIP_BOTH || SselectedStrip == STRIP_Y){
+    stripY.setBrightness(stripYdata.intensity);
+  }
+}
 uint32_t colorLastX = 0;
 uint32_t colorLastY = 0;
 
