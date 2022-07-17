@@ -128,6 +128,6 @@ bool invertSignals = false;
 
 //STRIPS MENU - setup strip pixels etc
 uint8_t SselectedStrip = 0; //uses the same defines as AselectedStrip
-#define ADD       0 //for updateStripLength function
-#define SUBTRACT  1
+#define ADD       1 //for updateStripLength function
+#define SUBTRACT  -1
 bool editBrightness = false;
