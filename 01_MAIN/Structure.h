@@ -87,7 +87,7 @@ struct strip{
   uint8_t animationIndex = 0;
   uint8_t animations[8] = {0,1,2,3,4,5,6,7};
 
-  uint8_t intensity = 50; //0-255
+  uint8_t brightness = 50; //0-255
 };
 
 strip stripXdata;

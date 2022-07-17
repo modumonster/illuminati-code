@@ -226,7 +226,7 @@ void clickHandler(Button2& btn){
                 updateStripLength(ADD,SselectedStrip);
               }
               else{ //set to edit brightness
-                updateStripIntensity(ADD,SselectedStrip);
+                updateStripBrightness(ADD,SselectedStrip);
               }
             }
             else if(btnId == MINUS){
@@ -234,7 +234,7 @@ void clickHandler(Button2& btn){
                 updateStripLength(SUBTRACT,SselectedStrip);
               }
               else{ //set to edit brightness
-                updateStripIntensity(SUBTRACT,SselectedStrip);
+                updateStripBrightness(SUBTRACT,SselectedStrip);
               }
             }
             else if(btnId == SELECT){

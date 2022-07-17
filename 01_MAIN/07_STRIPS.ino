@@ -14,8 +14,8 @@ void stripsInit(){
   stripX.updateLength(stripXdata.pixels);
   stripY.updateLength(stripYdata.pixels);
   
-  stripX.setBrightness(stripXdata.intensity);
-  stripY.setBrightness(stripYdata.intensity);
+  stripX.setBrightness(stripXdata.brightness);
+  stripY.setBrightness(stripYdata.brightness);
 }
 
 void stripXTest() {
@@ -88,35 +88,35 @@ void updateStripLength(int8_t function, uint8_t index){ //function == 1 iff ADD,
 
 #define BRIGHTNESS_STEP 10
 
-void updateStripIntensity(int8_t sign, uint8_t index){
-  int16_t intensityX;
-  int16_t intensityY;
+void updateStripBrightness(int8_t sign, uint8_t index){
+  int16_t brightnessX;
+  int16_t brightnessY;
   if(SselectedStrip == STRIP_BOTH || SselectedStrip == STRIP_X){
-    intensityX = stripXdata.intensity + sign*BRIGHTNESS_STEP;
+    brightnessX = stripXdata.brightness + sign*BRIGHTNESS_STEP;
 
-    if(intensityX > 255){
-      intensityX = 255;
+    if(brightnessX > 255){
+      brightnessX = 255;
     }
-    else if(intensityX < BRIGHTNESS_STEP){
-      intensityX = BRIGHTNESS_STEP;
+    else if(brightnessX < BRIGHTNESS_STEP){
+      brightnessX = BRIGHTNESS_STEP;
     }
-    stripXdata.intensity = intensityX;
-    stripX.setBrightness(stripXdata.intensity);
-    Serial.print("Set stripX brightness to ");Serial.println(stripXdata.intensity);
+    stripXdata.brightness = brightnessX;
+    stripX.setBrightness(stripXdata.brightness);
+    Serial.print("Set stripX brightness to ");Serial.println(stripXdata.brightness);
   }
   
   if(SselectedStrip == STRIP_BOTH || SselectedStrip == STRIP_Y){
-    intensityY = stripYdata.intensity + sign*BRIGHTNESS_STEP;
+    brightnessY = stripYdata.brightness + sign*BRIGHTNESS_STEP;
 
-    if(intensityY > 255){
-      intensityY = 255;
+    if(brightnessY > 255){
+      brightnessY = 255;
     }
-    else if(intensityY < BRIGHTNESS_STEP){
-      intensityY = BRIGHTNESS_STEP;
+    else if(brightnessY < BRIGHTNESS_STEP){
+      brightnessY = BRIGHTNESS_STEP;
     }
-    stripYdata.intensity = intensityY;
-    stripY.setBrightness(stripYdata.intensity);
-    Serial.print("Set stripY brightness to ");Serial.println(stripYdata.intensity);
+    stripYdata.brightness = brightnessY;
+    stripY.setBrightness(stripYdata.brightness);
+    Serial.print("Set stripY brightness to ");Serial.println(stripYdata.brightness);
   }
 }
 
@@ -153,7 +153,7 @@ void CVtoStrip() {
     colorLastX = color; //store last shown color
   }
   else if(lightsOn && (stripX.getBrightness() == 0)){
-    stripX.setBrightness(stripXdata.intensity);
+    stripX.setBrightness(stripXdata.brightness);
     stripX.fill(colorLastX,0,stripXdata.pixels);
   }
   
@@ -162,7 +162,7 @@ void CVtoStrip() {
     colorLastY = color; //store last shown color
   }
   else if(lightsOn && (stripY.getBrightness() == 0)){
-    stripY.setBrightness(stripXdata.intensity);
+    stripY.setBrightness(stripXdata.brightness);
     stripY.fill(colorLastY,0,stripYdata.pixels);
   }
 
