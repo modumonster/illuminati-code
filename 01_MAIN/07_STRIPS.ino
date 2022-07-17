@@ -1,21 +1,18 @@
 Adafruit_NeoPixel stripX(stripXdata.pixels, X_STRIP_PIN, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel stripY(stripYdata.pixels, Y_STRIP_PIN, NEO_GRB + NEO_KHZ800);
 
-uint8_t Sintensity = 150;
+uint8_t Sintensity = 50;
 
 void stripsInit(){
   stripX.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
   stripY.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
   //clean set pixels to 0
-  uint32_t noColor = stripX.Color(0,0,0);
   stripX.updateLength(255);
   stripY.updateLength(255);
-  stripX.fill(0,254,noColor);
-  stripY.fill(0,254,noColor);
-  stripX.show();
-  stripY.show();
   stripX.clear();
   stripY.clear();
+  stripX.show();
+  stripY.show();
   stripX.updateLength(stripXdata.pixels);
   stripY.updateLength(stripYdata.pixels);
   
@@ -90,40 +87,55 @@ void updateStripLength(uint8_t function, uint8_t index){
     }
   }
 }
+
+uint32_t colorLastX = 0;
+uint32_t colorLastY = 0;
+
 void CVtoStrip() {
-  stripX.clear();
-  stripY.clear();
   uint8_t red   = toValue(R);
   uint8_t green = toValue(G);
   uint8_t blue  = toValue(B);
   uint32_t color = stripX.Color(red,green,blue);
-  stripX.fill(color,0,stripXdata.pixels);
-  stripY.fill(color,0,stripYdata.pixels);
+  if(!pauseAnimation){
+      
+    switch(stripXdata.animationIndex){
+      case RGB_ANIMATION:
+        stripX.fill(color,0,stripXdata.pixels);
+        break;
+      default:
+        break;
+    }
+    switch(stripYdata.animationIndex){
+      case RGB_ANIMATION:
+        stripY.fill(color,0,stripYdata.pixels);
+        break;
+      default:
+        break;
+    }
+  }
 
   if(!lightsOn && (stripX.getBrightness() != 0)){
     stripX.setBrightness(0);
-    stripX.show();
+    colorLastX = color; //store last shown color
   }
   else if(lightsOn && (stripX.getBrightness() == 0)){
     stripX.setBrightness(Sintensity);
-    stripX.show();
+    stripX.fill(colorLastX,0,stripXdata.pixels);
   }
-  else{
-    if(stripX.canShow()){
-      stripX.show();
-    }
-  }
+  
   if(!lightsOn && (stripY.getBrightness() != 0)){
     stripY.setBrightness(0);
-    stripY.show();
+    colorLastY = color; //store last shown color
   }
   else if(lightsOn && (stripY.getBrightness() == 0)){
     stripY.setBrightness(Sintensity);
-    stripY.show();
+    stripY.fill(colorLastY,0,stripYdata.pixels);
   }
-  else{
-    if(stripY.canShow()){  
+
+  if(stripX.canShow()){
+    stripX.show();
+  }  
+  if(stripY.canShow()){
     stripY.show();
-    }
   }
 }

@@ -59,8 +59,8 @@ const LEDcolor CVcolor[6]       = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA};
 const LEDcolor STRIPcolor[3]    = {RED,GREEN,BLUE};
 const LEDcolor MENUcolor[8]     = {RED,GREEN,BLUE,YELLOW,CYAN,MAGENTA,OFF,OFF};
 const LEDcolor RFcolor[3]       = {RED,GREEN,BLUE}; // 0ms, 5ms, 10ms
-const LEDcolor GAINMINcolor[]  = {YELLOW,RED,GREEN,BLUE};
-const LEDcolor GAINMAXcolor[]  = {YELLOW,RED,GREEN,BLUE};
+const LEDcolor GAINMINcolor[]   = {YELLOW,RED,GREEN,BLUE};
+const LEDcolor GAINMAXcolor[]   = {YELLOW,RED,GREEN,BLUE};
 const LEDcolor REACTcolor[4]    = {RED,GREEN,BLUE,YELLOW};
 
 LEDcolor modeLED        = {0,0,0};
@@ -78,11 +78,15 @@ bool blinkSelectLED  = false;
 #define TRIG_NEXT   1
 #define VOCT_STEPS  2
 
+//animationIndex - index which corresponds to animation
+#define RGB_ANIMATION 0
+
 struct strip{
-  uint8_t pixels = 1;
+  uint8_t pixels = 16;
 
   uint8_t reaction; // TRIG_RANDOM, TRIG_NEXT, VOCT_STEPS (8 steps)
-  uint8_t steps[8] = {0,1,2,3,4,5,6,7};
+  uint8_t animationIndex = 0;
+  uint8_t animations[8] = {0,1,2,3,4,5,6,7};
 
   uint8_t intensity = 255; //0-255
 };
@@ -120,7 +124,7 @@ uint8_t AselectedStrip = 0;
 
 //JAM MENU
 bool lightsOn = true;
-
+bool pauseAnimation = false;
 bool invertSignals = false;
 
 //STRIPS MENU - setup strip pixels etc

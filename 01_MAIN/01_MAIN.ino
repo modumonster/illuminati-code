@@ -49,7 +49,7 @@ bool TimerHandler2(struct repeating_timer *t)
   Serial.print("ITimer2: millis() = "); Serial.println(millis());
 #endif
 
-  printCV();
+  //printCV();
   //plotCV();
   CVtoLamp();
   return true;

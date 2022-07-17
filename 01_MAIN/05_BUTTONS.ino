@@ -180,6 +180,7 @@ void clickHandler(Button2& btn){
             }
             else if(btnId == PLUS){
               //pause animation
+              pauseAnimation = !pauseAnimation;
               Serial.println("JAM \t| Pause animation");
             }
             else if(btnId == MINUS){
