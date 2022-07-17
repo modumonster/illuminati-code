@@ -188,6 +188,7 @@ void clickHandler(Button2& btn){
             }
             else if(btnId == SELECT){
               //invert all signals
+              invertSignals = !invertSignals;
               Serial.println("JAM \t| Invert all signals");
             }
           break;

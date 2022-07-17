@@ -51,7 +51,11 @@ bool CVswitch = readRBA;
 
 double toValue(uint8_t index){
   double result; //added for autoGain issues, which will need to be addressed later
+  
   result = mapd(CV[index].avgValue,rangeMin(CV[index]),rangeMax(CV[index]),0,255);
+  if(invertSignals){
+    result = 255.0 - result;
+  }
   return result;
 }
 
