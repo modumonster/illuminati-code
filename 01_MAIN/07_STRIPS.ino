@@ -98,18 +98,20 @@ void CVtoStrip() {
   uint32_t color = stripX.Color(red,green,blue);
   if(!pauseAnimation){
       
-    switch(stripXdata.animationIndex){
+    switch(stripXdata.animations[stripXdata.animationIndex]){
       case RGB_ANIMATION:
         stripX.fill(color,0,stripXdata.pixels);
         break;
       default:
+        Serial.print("Now running animation #");Serial.println(stripXdata.animations[stripXdata.animationIndex]);
         break;
     }
-    switch(stripYdata.animationIndex){
+    switch(stripYdata.animations[stripYdata.animationIndex]){
       case RGB_ANIMATION:
         stripY.fill(color,0,stripYdata.pixels);
         break;
       default:
+        Serial.print("Now running animation #");Serial.println(stripYdata.animations[stripYdata.animationIndex]);
         break;
     }
   }

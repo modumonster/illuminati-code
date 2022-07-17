@@ -185,6 +185,14 @@ void clickHandler(Button2& btn){
             }
             else if(btnId == MINUS){
               //next animation
+              stripXdata.animationIndex++;
+              stripYdata.animationIndex++;
+              if(stripXdata.animationIndex > 7){
+                stripXdata.animationIndex = 0;
+              }
+              if(stripYdata.animationIndex > 7){
+                stripYdata.animationIndex = 0;
+              }
               Serial.println("JAM \t| Next animation");
             }
             else if(btnId == SELECT){
