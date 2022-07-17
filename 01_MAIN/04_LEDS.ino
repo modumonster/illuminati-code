@@ -123,7 +123,6 @@ void updateLEDs(){
         blinkModeLED = false;
       if(GselectedCV == A && !lampALinear || GselectedCV == Z && !lampZLinear){
         blinkModeLED = true;
-        blinkCounter = 0;
       }
       plusLED   = GAINMINcolor[CV[GselectedCV].minIndex];
       minusLED  = GAINMAXcolor[CV[GselectedCV].maxIndex];
@@ -147,10 +146,23 @@ void updateLEDs(){
       selectLED = STRIPcolor[AselectedStrip];
       break;
     case JAM:
+        blinkModeLED = false;
+        blinkPlusLED = false;
+        blinkSelectLED = false;
+
       modeLED   = MENUcolor[JAM];
+      if(!lightsOn){
+        blinkModeLED = true;
+      }
       plusLED   = MENUcolor[JAM];
+      if(pauseAnimation){
+        blinkPlusLED = true;
+      }
       minusLED  = MENUcolor[JAM];
       selectLED = MENUcolor[JAM];
+      if(invertSignals){
+        blinkSelectLED = true;
+      }
       break;
     case MIDI:
       modeLED   = MENUcolor[MIDI];
